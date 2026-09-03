@@ -51,7 +51,3 @@ Como instalar o Git, baixar o repositório e enviar os exercícios.
 ### Aula 06 — _em breve_
 ### Aula 07 — _em breve_
 ### Aula 08 — _em breve_
-
-## Curso relacionado
-
-- [Curso Java - Unibave 2026](https://github.com/ByelBardini/curso-java-unibave-2026)
