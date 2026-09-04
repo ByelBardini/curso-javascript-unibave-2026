@@ -80,4 +80,4 @@ O `-u` liga a sua branch local com a do GitHub. Depois desse primeiro push, bast
 
 ---
 
-Pronto! Sua branch já existe no GitHub. Agora siga o [Tutorial 2 — Enviando alterações para o GitHub](02-enviando-para-o-github.md).
+Pronto! Sua branch já existe no GitHub. Agora siga o [Tutorial 2 — Enviando alterações para o GitHub](02-enviando-para-o-github.md)...
