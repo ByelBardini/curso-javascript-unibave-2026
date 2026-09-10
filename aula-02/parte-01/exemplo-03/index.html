@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Olá, mundo! >> Console</h1>
+  </body>
+  <script>
+    // Operadores aritméticos
+    const numero1 = 10;
+    const numero2 = 5;
+
+    console.log("Soma:", numero1 + numero2); // 15
+    console.log("Subtração:", numero1 - numero2); // 5
+    console.log("Multiplicação:", numero1 * numero2); // 50
+    console.log("Divisão:", numero1 / numero2); // 2
+    console.log("Resto da divisão:", numero1 % numero2); // 0
+    console.log("Potenciação:", numero1 ** 2); // 100 (equivale a numero1 * numero1)
+
+    // Exemplo prático: calculando o total de uma compra
+    const precoProduto = 49.9;
+    const quantidade = 3;
+    const totalCompra = precoProduto * quantidade;
+    console.log("Total da compra:", totalCompra); // 149.7
+
+    //-------------------------------------------------------------------------//
+    console.log("**---------------------------**");
+    //-------------------------------------------------------------------------//
+
+    // Operadores de atribuição
+    let pontos = 10;
+    console.log("Pontos iniciais:", pontos); // 10
+
+    pontos += 5; // equivale a: pontos = pontos + 5
+    console.log("Pontos após += 5:", pontos); // 15
+
+    pontos -= 2; // equivale a: pontos = pontos - 2
+    console.log("Pontos após -= 2:", pontos); // 13
+
+    pontos *= 2; // equivale a: pontos = pontos * 2
+    console.log("Pontos após *= 2:", pontos); // 26
+
+    pontos /= 2; // equivale a: pontos = pontos / 2
+    console.log("Pontos após /= 2:", pontos); // 13
+
+    pontos **= 2; // equivale a: pontos = pontos ** 2
+    console.log("Pontos após **= 2:", pontos); // 169
+
+    pontos %= 5; // equivale a: pontos = pontos % 5
+    console.log("Pontos após %= 5:", pontos); // 4
+
+    //-------------------------------------------------------------------------//
+    console.log("**---------------------------**");
+    //-------------------------------------------------------------------------//
+
+    // Operadores lógicos
+    const temIngresso = true;
+    const maiorDeIdade = false;
+
+    console.log(
+      "Tem ingresso E(&&) maior de idade:",
+      temIngresso && maiorDeIdade,
+    ); // false (E: as duas precisam ser verdadeiras)
+    console.log(
+      "Tem ingresso OU(||) maior de idade:",
+      temIngresso || maiorDeIdade,
+    ); // true (OU: basta uma ser verdadeira)
+    console.log("NÃO tem ingresso:", !temIngresso); // false (NÃO: inverte o valor)
+
+    const idade = 20;
+    const podeEntrar = idade >= 18 && temIngresso;
+    console.log("Pode entrar:", podeEntrar); // true
+
+    //-------------------------------------------------------------------------//
+    console.log("**---------------------------**");
+    //-------------------------------------------------------------------------//
+
+    // Operadores de incremento e decremento
+    let contador = 0;
+
+    contador++; // 1
+    contador++; // 2
+    contador--; // 1
+    console.log("Contador:", contador); // 1
+
+    // Pós-fixado: retorna o valor e depois incrementa
+    let a = 5;
+    console.log("a++ (retorna antes de incrementar):", a++); // 5
+    console.log("valor de a depois:", a); // 6
+
+    // Pré-fixado: incrementa e depois retorna o valor
+    let b = 5;
+    console.log("++b (incrementa antes de retornar):", ++b); // 6
+    console.log("valor de b depois:", b); // 6
+  </script>
+</html>

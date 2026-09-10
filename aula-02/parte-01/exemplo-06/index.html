@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Olá, mundo! >> Console</h1>
+  </body>
+  <script>
+    // Função sem parametro
+    let nomeA;
+
+    function saudacaoA() {
+      console.log("Olá, " + nomeA + "!");
+    }
+
+    nomeA = "Gabriel";
+    saudacaoA();
+
+    nomeA = "Ana";
+    saudacaoA();
+
+    nomeA = "João";
+    saudacaoA();
+
+    //-------------------------------------------------------------------------//
+    console.log("**---------------------------**");
+    //-------------------------------------------------------------------------//
+
+    // Função com parametro
+    function saudacaoB(nomeB) {
+      console.log("Olá, " + nomeB + "!");
+    }
+
+    saudacaoB("Gabriel");
+    saudacaoB("Ana");
+    saudacaoB("João");
+  </script>
+</html>

@@ -1,21 +1,41 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exemplo 02 - Alterando a página</title>
+    <title>Document</title>
   </head>
   <body>
-    <h1 id="titulo">Título original</h1>
+    <h2>Saudação</h2>
 
-    <p id="paragrafo">Este é um parágrafo comum.</p>
+    <!-- Campo onde o usuário digita o nome -->
+    <input type="text" id="nome" placeholder="Digite seu nome" />
 
-    <input type="text" id="campo" placeholder="Digite um novo título" />
+    <!-- Campo onde o usuário digita o ano de nascimento -->
+    <input type="number" id="nascimento" placeholder="Ano de nascimento" />
 
-    <button onclick="trocaTexto()">Trocar o texto do título</button>
-    <button onclick="trocaCor()">Trocar a cor do título</button>
-    <button onclick="trocaHtml()">Trocar o HTML do parágrafo</button>
-    <button onclick="esconde()">Esconder / mostrar o parágrafo</button>
+    <!-- O HTML chama: onclick="saudacao()" -->
+    <button onclick="saudacao()">Saudação</button>
+
+    <!-- Aqui será exibido o texto de saudação com a idade calculada -->
+    <p id="resultadoSaudacao"></p>
   </body>
-  <script src="script.js"></script>
+
+  <script>
+    // O JavaScript executa: saudacao()
+    function saudacao() {
+      // Lê o texto digitado no campo "nome"
+      const nome = document.getElementById("nome").value;
+
+      // Lê o ano de nascimento e converte para número
+      const nascimento = Number(document.getElementById("nascimento").value);
+
+      // Calcula a idade com base no ano atual (2026)
+      const idade = 2026 - nascimento;
+
+      // Exibe a saudação com nome e idade no parágrafo de resultado
+      document.getElementById("resultadoSaudacao").textContent =
+        `Olá, ${nome}, você deve ter ${idade} anos.`;
+    }
+  </script>
 </html>

@@ -1,25 +1,73 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exemplo 03 - Eventos</title>
+    <title>Document</title>
   </head>
   <body>
-    <h1>Eventos sem onclick no HTML</h1>
+    <h2>Calculadora</h2>
 
-    <button id="botao">Clique aqui</button>
-    <p id="contador">Cliques: 0</p>
+    <!-- Campo do primeiro número da conta -->
+    <input type="number" id="numero1" placeholder="Primeiro número" />
 
-    <input type="text" id="campo" placeholder="Digite alguma coisa" />
-    <p id="espelho">Você digitou: </p>
+    <!-- Campo do segundo número da conta -->
+    <input type="number" id="numero2" placeholder="Segundo número" />
 
-    <select id="cor">
-      <option value="black">Preto</option>
-      <option value="red">Vermelho</option>
-      <option value="green">Verde</option>
-    </select>
-    <p id="amostra">Esse texto muda de cor</p>
+    <br /><br />
+
+    <!-- Cada botão chama uma função diferente de acordo com a operação -->
+    <button onclick="somar()">+</button>
+    <button onclick="subtrair()">-</button>
+    <button onclick="multiplicar()">×</button>
+    <button onclick="dividir()">÷</button>
+
+    <!-- Aqui será exibido o resultado da operação escolhida -->
+    <p id="resultadoCalculo"></p>
   </body>
-  <script src="script.js"></script>
+  <script>
+    // Soma os dois números digitados e mostra o resultado
+    function somar() {
+      const numero1 = Number(document.getElementById("numero1").value);
+      const numero2 = Number(document.getElementById("numero2").value);
+
+      const resultado = numero1 + numero2;
+
+      document.getElementById("resultadoCalculo").textContent =
+        `Resultado: ${resultado}`;
+    }
+
+    // Subtrai o segundo número do primeiro e mostra o resultado
+    function subtrair() {
+      const numero1 = Number(document.getElementById("numero1").value);
+      const numero2 = Number(document.getElementById("numero2").value);
+
+      const resultado = numero1 - numero2;
+
+      document.getElementById("resultadoCalculo").textContent =
+        `Resultado: ${resultado}`;
+    }
+
+    // Multiplica os dois números digitados e mostra o resultado
+    function multiplicar() {
+      const numero1 = Number(document.getElementById("numero1").value);
+      const numero2 = Number(document.getElementById("numero2").value);
+
+      const resultado = numero1 * numero2;
+
+      document.getElementById("resultadoCalculo").textContent =
+        `Resultado: ${resultado}`;
+    }
+
+    // Divide o primeiro número pelo segundo e mostra o resultado
+    function dividir() {
+      const numero1 = Number(document.getElementById("numero1").value);
+      const numero2 = Number(document.getElementById("numero2").value);
+
+      const resultado = numero1 / numero2;
+
+      document.getElementById("resultadoCalculo").textContent =
+        `Resultado: ${resultado}`;
+    }
+  </script>
 </html>
