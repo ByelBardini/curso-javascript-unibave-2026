@@ -114,9 +114,10 @@ separada do que mexe na tela.
 **Exercícios**
 
 - [Exercícios da aula](aula-02/exercicios/index.html) — cinco exercícios em um arquivo só,
-  com o código a ser escrito em [script.js](aula-02/exercicios/script.js). Os dois
-  primeiros são livres, o 03 e o 04 praticam DOM e o 05 cobra a separação entre as funções
-  de cálculo e a função que escreve na página.
+  com o código a ser escrito em [script.js](aula-02/exercicios/script.js). O 01 fica só no
+  `console.log` (variáveis, tipos e template string), o 02 faz o ciclo completo de ler um
+  campo, converter com `Number()` e escrever com `textContent`, o 03 e o 04 praticam DOM e
+  o 05 cobra a separação entre as funções de cálculo e a função que escreve na página.
 
 ### Aula 03 — _em breve_
 ### Aula 04 — _em breve_
