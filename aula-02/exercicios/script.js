@@ -3,12 +3,20 @@
 // ============================================================
 
 // ============================================================
-// EXERCÍCIO 01
+// EXERCÍCIO 01 — Ficha do aluno (console)
+//
+// Este exercício não usa a página: só variáveis e console.log.
+// Abra o console do navegador com F12 para ver a saída.
 // ============================================================
 
 // ============================================================
-// EXERCÍCIO 02
+// EXERCÍCIO 02 — Preço com desconto
 // ============================================================
+
+function calcularDesconto() {
+}
+
+document.getElementById("calcularDesconto").addEventListener("click", calcularDesconto);
 
 // ============================================================
 // EXERCÍCIO 03 — Contador de curtidas

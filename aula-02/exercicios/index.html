@@ -11,15 +11,78 @@
     <p>O código vai no arquivo <code>script.js</code>.</p>
 
     <section>
-      <h2>Exercício 01</h2>
+      <h2>Exercício 01 - Ficha do aluno (console)</h2>
 
-      <!-- livre -->
+      <p>
+        Este exercício não mexe na página: tudo acontece no
+        <code>console.log</code>. Abra o console do navegador com
+        <code>F12</code> para ver a saída.
+      </p>
+
+      <ol>
+        <li>
+          Crie as variáveis <code>nome</code> (texto),
+          <code>idade</code> (número) e <code>matriculado</code> (booleano) com
+          os seus dados.
+        </li>
+        <li>
+          Use <code>let</code> só no que vai mudar de valor e
+          <code>const</code> no resto.
+        </li>
+        <li>
+          Escreva uma frase única no console usando template string, no formato:
+          <code>Ana tem 20 anos e está matriculada: true</code>.
+        </li>
+        <li>
+          Some 1 na idade (aniversário) e mostre a frase novamente, para ver o
+          valor atualizado.
+        </li>
+        <li class="desafio">
+          <strong>Desafio:</strong> mostre também o <code>typeof</code> das três
+          variáveis e confira se cada tipo é o que você esperava.
+        </li>
+      </ol>
+
+      <p class="dica">
+        Se uma variável foi criada com <code>const</code>, o passo 4 vai quebrar
+        e o console vai dizer o motivo. Leia o erro: ele explica sozinho quando
+        usar <code>let</code>.
+      </p>
     </section>
 
     <section>
-      <h2>Exercício 02</h2>
+      <h2>Exercício 02 - Preço com desconto</h2>
 
-      <!-- livre -->
+      <p>
+        O primeiro exercício que lê o que o usuário digitou e escreve a resposta
+        na tela.
+      </p>
+
+      <ol>
+        <li>Leia o preço do produto e o desconto em porcentagem.</li>
+        <li>Calcule o valor do desconto e o preço final.</li>
+        <li>
+          Mostre o resultado no formato:
+          <code>De R$ 100 por R$ 90 (você economiza R$ 10)</code>.
+        </li>
+        <li class="desafio">
+          <strong>Desafio:</strong> se o desconto for maior que 100, mostre um
+          aviso em vez do cálculo.
+        </li>
+      </ol>
+
+      <input type="number" id="preco" placeholder="Preço" />
+      <input type="number" id="desconto" placeholder="Desconto (%)" />
+      <button id="calcularDesconto">Calcular</button>
+
+      <p class="saida" id="resultadoDesconto"></p>
+
+      <p class="dica">
+        O <code>.value</code> de um <code>input</code> sempre vem como texto,
+        mesmo com <code>type="number"</code>. Sem <code>Number()</code>, o
+        <code>+</code> gruda os valores em vez de somar, como no exemplo 05 da
+        parte 01.
+      </p>
     </section>
 
     <section>
@@ -117,7 +180,6 @@
         conferir se elas estão certas antes mesmo de clicar no botão.
       </p>
     </section>
-
     <script src="script.js"></script>
   </body>
 </html>
