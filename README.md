@@ -48,29 +48,66 @@ Como instalar o Git, baixar o repositório e enviar os exercícios.
 
 ### Aula 02 — JavaScript e DOM
 
-**Parte 01 — JavaScript no navegador** — _em breve_
+**Parte 01 — JavaScript no navegador**
 
-**Parte 02 — DOM**
+Primeiro contato com a linguagem, sem nenhuma manipulação de página: tudo roda no
+`<script>` e é observado pelo `console.log`. Cada exemplo tem só um `index.html`.
 
-Como o JavaScript enxerga e altera a página. Cada exemplo tem um `index.html` e um
-`script.js`.
+- [Exemplo 01 — Olá, mundo](aula-02/parte-01/exemplo-01/index.html) — primeiro script da
+  aula, um único `console.log` para ver a saída no console do navegador.
+- [Exemplo 02 — Variáveis e tipos de dados](aula-02/parte-01/exemplo-02/index.html) —
+  diferença entre `const` e `let`, e os tipos primitivos (`string`, `number`, `boolean`,
+  `undefined`, `null`) verificados com `typeof`.
+- [Exemplo 03 — Operadores](aula-02/parte-01/exemplo-03/index.html) — operadores
+  aritméticos, de atribuição composta (`+= -= *=`...), lógicos (`&& || !`) e de
+  incremento/decremento (`++`/`--`).
+- [Exemplo 04 — Concatenação e template strings](aula-02/parte-01/exemplo-04/index.html) —
+  concatenar com `+` versus usar template strings com crase e `${}`.
+- [Exemplo 05 — Conversão de tipos com Number()](aula-02/parte-01/exemplo-05/index.html) —
+  o erro clássico de somar strings numéricas (`"10" + "10"`) e a correção com `Number()`.
+- [Exemplo 06 — Funções com e sem parâmetro](aula-02/parte-01/exemplo-06/index.html) —
+  compara uma função que depende de uma variável externa com uma que recebe parâmetro.
+- [Exemplo 07 — Retorno de função](aula-02/parte-01/exemplo-07/index.html) — o `return`
+  para devolver um valor utilizável fora da função.
 
-- [Exemplo 01 — Lendo um campo](aula-02/parte-02/exemplo-01/index.html) — primeiro contato
-  com `document.getElementById`, a propriedade `value` de um `input` e o `console.log`.
-- [Exemplo 02 — Alterando a página](aula-02/parte-02/exemplo-02/index.html) — trocar o
-  conteúdo com `textContent` e `innerHTML`, mudar a aparência com `style` e esconder
-  elementos com `display`.
-- [Exemplo 03 — Eventos](aula-02/parte-02/exemplo-03/index.html) — `addEventListener` no
+**Parte 02 — Manipulação da página**
+
+Primeiro contato com o DOM: ler valores digitados pelo usuário e escrever resultados na
+página, disparando as funções com `onclick` no próprio HTML. Cada exemplo tem só um
+`index.html`, com o script embutido no fim do arquivo.
+
+- [Exemplo 01 — Primeira função ligada a um botão](aula-02/parte-02/exemplo-01/index.html) —
+  um botão chamando uma função que faz `console.log`, ainda sem ler nada da página.
+- [Exemplo 02 — Saudação com cálculo de idade](aula-02/parte-02/exemplo-02/index.html) —
+  `document.getElementById(...).value` para ler nome e ano de nascimento, `Number()` para
+  converter e `textContent` para escrever o resultado.
+- [Exemplo 03 — Calculadora](aula-02/parte-02/exemplo-03/index.html) — quatro funções
+  (somar, subtrair, multiplicar, dividir), cada uma ligada a um botão, lendo dois campos
+  numéricos e escrevendo o resultado na tela.
+
+**Parte 03 — DOM: eventos**
+
+Aprofunda o DOM da parte 02, agora com `script.js` separado do HTML. Troca o `onclick`
+por `addEventListener` e fecha com um catálogo de outros eventos do navegador.
+
+- [Exemplo 01 — Exibir nome no console](aula-02/parte-03/exemplo-01/index.html) — dois
+  botões lendo o mesmo campo com `document.getElementById(...).value` e imprimindo com
+  `console.log`, primeiro exemplo já com `script.js` externo.
+- [Exemplo 02 — Alterando a página](aula-02/parte-03/exemplo-02/index.html) — quatro formas
+  de alterar o DOM: `textContent`, `style`, `innerHTML` e `style.display` para
+  esconder/mostrar um elemento.
+- [Exemplo 03 — Eventos](aula-02/parte-03/exemplo-03/index.html) — `addEventListener` no
   lugar do `onclick` no HTML, com os eventos `click`, `input` e `change`.
-- [Exemplo 04 — Criando e removendo elementos](aula-02/parte-02/exemplo-04/index.html) —
-  uma lista de tarefas montada com `createElement`, `appendChild` e `remove`.
+- [Exemplo 04 — Outros eventos](aula-02/parte-03/exemplo-04/index.html) — catálogo mais
+  amplo de eventos do DOM: `dblclick`, `keydown`, `focus`/`blur`, `mouseover`/`mouseout`,
+  `mousemove`, `submit` (com `preventDefault()`) e `contextmenu`.
 
-**Parte 03 — Funções e lógica**
+**Parte 04 — Funções e lógica**
 
-Onde as duas primeiras partes se encontram: funções que chamam outras funções, com a
-lógica separada do que mexe na tela.
+Onde as partes anteriores se encontram: funções que chamam outras funções, com a lógica
+separada do que mexe na tela.
 
-- [Validação de cadastro](aula-02/parte-03/index.html) — uma função de validação para cada
+- [Validação de cadastro](aula-02/parte-04/index.html) — uma função de validação para cada
   campo, todas devolvendo a mensagem de erro com `return` e nenhuma delas tocando no HTML.
   A função principal só organiza a ordem: ler, validar, mostrar e decidir.
 
