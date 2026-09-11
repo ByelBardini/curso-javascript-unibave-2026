@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Calculadora</h2>
+
+    <!-- Campo do primeiro número da conta -->
+    <input type="number" id="numero1" placeholder="Primeiro número" />
+
+    <!-- Campo do segundo número da conta -->
+    <input type="number" id="numero2" placeholder="Segundo número" />
+
+    <br /><br />
+
+    <!-- Cada botão chama uma função diferente de acordo com a operação -->
+    <button onclick="somar()">+</button>
+    <button onclick="subtrair()">-</button>
+    <button onclick="multiplicar()">×</button>
+    <button onclick="dividir()">÷</button>
+
+    <!-- Aqui será exibido o resultado da operação escolhida -->
+    <p id="resultadoCalculo"></p>
+  </body>
+  <script>
+    // Soma os dois números digitados e mostra o resultado
+    function somar() {
+      const numero1 = Number(document.getElementById("numero1").value);
+      const numero2 = Number(document.getElementById("numero2").value);
+
+      const resultado = numero1 + numero2;
+
+      console.log(`Resultado: ${resultado}`);
+    }
+
+    // Subtrai o segundo número do primeiro e mostra o resultado
+    function subtrair() {
+      const numero1 = Number(document.getElementById("numero1").value);
+      const numero2 = Number(document.getElementById("numero2").value);
+
+      const resultado = numero1 - numero2;
+
+      console.log(`Resultado: ${resultado}`);
+    }
+
+    // Multiplica os dois números digitados e mostra o resultado
+    function multiplicar() {
+      const numero1 = Number(document.getElementById("numero1").value);
+      const numero2 = Number(document.getElementById("numero2").value);
+
+      const resultado = numero1 * numero2;
+
+      console.log(`Resultado: ${resultado}`);
+    }
+
+    // Divide o primeiro número pelo segundo e mostra o resultado
+    function dividir() {
+      const numero1 = Number(document.getElementById("numero1").value);
+      const numero2 = Number(document.getElementById("numero2").value);
+
+      const resultado = numero1 / numero2;
+
+      console.log(`Resultado: ${resultado}`);
+    }
+  </script>
+</html>

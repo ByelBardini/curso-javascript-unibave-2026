@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Olá, mundo! >> Console</h1>
+  </body>
+  <script>
+    // Forma errada (Resultado: 1010)
+    const numeroA = "10";
+
+    const somaA = numeroA + numeroA;
+
+    console.log("Sem Number");
+    console.log(`${numeroA} + ${numeroA} = ${somaA}`);
+
+    console.log("**---------------------------**");
+
+    // Forma Correta (Resultado: 20)
+    const numeroB = Number("10");
+
+    const somaB = numeroB + numeroB;
+
+    console.log("Com Number");
+    console.log(`${numeroB} + ${numeroB} = ${somaB}`);
+  </script>
+</html>

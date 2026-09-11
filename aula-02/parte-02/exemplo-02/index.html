@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Saudação</h2>
+
+    <!-- Campo onde o usuário digita o nome -->
+    <input type="text" id="nome" placeholder="Digite seu nome" />
+
+    <!-- Campo onde o usuário digita o ano de nascimento -->
+    <input type="number" id="nascimento" placeholder="Ano de nascimento" />
+
+    <!-- O HTML chama: onclick="saudacao()" -->
+    <button onclick="saudacao()">Saudação</button>
+  </body>
+
+  <script>
+    // O JavaScript executa: saudacao()
+    function saudacao() {
+      // Lê o texto digitado no campo "nome"
+      const nome = document.getElementById("nome").value;
+
+      // Lê o ano de nascimento e converte para número
+      const nascimento = Number(document.getElementById("nascimento").value);
+
+      // Calcula a idade com base no ano atual (2026)
+      const idade = 2026 - nascimento;
+
+      // Resultado no console
+      console.log(`Olá, ${nome}, você deve ter ${idade} anos.`);
+    }
+  </script>
+</html>

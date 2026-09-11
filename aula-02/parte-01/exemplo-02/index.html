@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Olá, mundo! >> Console</h1>
+  </body>
+  <script>
+    // Variáveis
+    const nomeA = "Ana";
+    let idadeA = 20;
+
+    console.log("Nome:", nomeA);
+    console.log("Idade antes:", idadeA); // 20
+
+    idadeA = 21; // let permite reatribuição, const não permitiria
+
+    console.log("Idade depois:", idadeA); // 21
+
+    //-------------------------------------------------------------------------//
+    console.log("**---------------------------**");
+    //-------------------------------------------------------------------------//
+
+    // Tipos de dados
+    const nomeB = "Ana"; // string
+    const idadeB = 20; // number
+    const matriculado = true; // boolean
+
+    let telefone; // undefined (declarada mas sem valor)
+    const observacao = null; // null (valor "vazio" atribuído propositalmente)
+
+    console.log("Tipo de nomeB:", typeof nomeB); // string
+    console.log("Tipo de idadeB:", typeof idadeB); // number
+    console.log("Tipo de matriculado:", typeof matriculado); // boolean
+    console.log("Tipo de telefone:", typeof telefone); // undefined
+    console.log("Tipo de observacao:", typeof observacao); // object (peculiaridade do JavaScript)
+  </script>
+</html>

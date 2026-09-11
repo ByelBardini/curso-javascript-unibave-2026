@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exemplo 05 - Outros eventos</title>
+  </head>
+  <body>
+    <h1>Outros eventos do DOM</h1>
+    <p>Abra o console do navegador (F12) para acompanhar as mensagens.</p>
+
+    <hr />
+
+    <h2>1. dblclick - clique duplo</h2>
+    <p id="texto-duplo">Dê um clique duplo neste texto.</p>
+
+    <hr />
+
+    <h2>2. keydown - tecla pressionada</h2>
+    <input type="text" id="campo-tecla" placeholder="Digite algo aqui" />
+    <p id="tecla">Nenhuma tecla pressionada ainda.</p>
+    <p id="enter"></p>
+
+    <hr />
+
+    <h2>3. focus e blur - entrar e sair do campo</h2>
+    <input type="text" id="campo-foco" placeholder="Clique aqui e depois clique fora" />
+    <p id="estado-foco">Campo sem foco.</p>
+
+    <hr />
+
+    <h2>4. mouseover e mouseout - passar o mouse</h2>
+    <div id="caixa" style="width: 200px; padding: 20px; border: 1px solid black">
+      Passe o mouse aqui
+    </div>
+
+    <hr />
+
+    <h2>5. mousemove - posição do mouse</h2>
+    <div id="area" style="width: 300px; height: 100px; border: 1px solid black">
+      Mexa o mouse dentro desta área
+    </div>
+    <p id="posicao">x: 0 / y: 0</p>
+
+    <hr />
+
+    <h2>6. submit - envio de formulário</h2>
+    <form id="formulario">
+      <input type="text" id="nome" placeholder="Seu nome" />
+      <button type="submit">Enviar</button>
+    </form>
+    <p id="resultado"></p>
+
+    <hr />
+
+    <h2>7. contextmenu - botão direito</h2>
+    <p id="direito">Clique com o botão direito aqui.</p>
+  </body>
+  <script src="script.js"></script>
+</html>

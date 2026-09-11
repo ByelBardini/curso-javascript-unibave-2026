@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aula 02 - Exercícios</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Aula 02 - Exercícios</h1>
+    <p>O código vai no arquivo <code>script.js</code>.</p>
+
+    <section>
+      <h2>Exercício 01 - Ficha do aluno (console)</h2>
+
+      <p>
+        Este exercício não mexe na página: tudo acontece no
+        <code>console.log</code>. Abra o console do navegador com
+        <code>F12</code> para ver a saída.
+      </p>
+
+      <ol>
+        <li>
+          Crie as variáveis <code>nome</code> (texto),
+          <code>idade</code> (número) e <code>matriculado</code> (booleano) com
+          os seus dados.
+        </li>
+        <li>
+          Use <code>let</code> só no que vai mudar de valor e
+          <code>const</code> no resto.
+        </li>
+        <li>
+          Escreva uma frase única no console usando template string, no formato:
+          <code>Ana tem 20 anos e está matriculada: true</code>.
+        </li>
+        <li>
+          Some 1 na idade (aniversário) e mostre a frase novamente, para ver o
+          valor atualizado.
+        </li>
+        <li class="desafio">
+          <strong>Desafio:</strong> mostre também o <code>typeof</code> das três
+          variáveis e confira se cada tipo é o que você esperava.
+        </li>
+      </ol>
+
+      <p class="dica">
+        Se uma variável foi criada com <code>const</code>, o passo 4 vai quebrar
+        e o console vai dizer o motivo. Leia o erro: ele explica sozinho quando
+        usar <code>let</code>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Exercício 02 - Preço com desconto</h2>
+
+      <p>
+        O primeiro exercício que lê o que o usuário digitou e escreve a resposta
+        na tela.
+      </p>
+
+      <ol>
+        <li>Leia o preço do produto e o desconto em porcentagem.</li>
+        <li>Calcule o valor do desconto e o preço final.</li>
+        <li>
+          Mostre o resultado no formato:
+          <code>De R$ 100 por R$ 90 (você economiza R$ 10)</code>.
+        </li>
+        <li class="desafio">
+          <strong>Desafio:</strong> se o desconto for maior que 100, mostre um
+          aviso em vez do cálculo.
+        </li>
+      </ol>
+
+      <input type="number" id="preco" placeholder="Preço" />
+      <input type="number" id="desconto" placeholder="Desconto (%)" />
+      <button id="calcularDesconto">Calcular</button>
+
+      <p class="saida" id="resultadoDesconto"></p>
+
+      <p class="dica">
+        O <code>.value</code> de um <code>input</code> sempre vem como texto,
+        mesmo com <code>type="number"</code>. Sem <code>Number()</code>, o
+        <code>+</code> gruda os valores em vez de somar, como no exemplo 05 da
+        parte 01.
+      </p>
+    </section>
+
+    <section>
+      <h2>Exercício 03 - Contador de curtidas</h2>
+
+      <p>Faça os dois botões alterarem o número de curtidas na tela.</p>
+
+      <ol>
+        <li>Curtir soma 1, descurtir tira 1.</li>
+        <li>O número nunca pode ficar negativo.</li>
+        <li>Quando passar de 10 curtidas, deixe o número verde.</li>
+      </ol>
+
+      <button id="curtir">Curtir</button>
+      <button id="descurtir">Descurtir</button>
+
+      <p class="saida" id="curtidas">Curtidas: 0</p>
+
+      <p class="dica">
+        Uma variável criada dentro da função nasce de novo a cada clique. Onde
+        ela precisa ficar para lembrar o valor anterior?
+      </p>
+    </section>
+
+    <section>
+      <h2>Exercício 04 - Lista de convidados</h2>
+
+      <p>Cada nome digitado deve virar um item novo na lista.</p>
+
+      <ol>
+        <li>
+          Ao clicar em adicionar, crie um <code>&lt;li&gt;</code> com o nome
+          digitado.
+        </li>
+        <li>Não deixe adicionar nome vazio, mostre um aviso.</li>
+        <li>Limpe o campo depois de adicionar.</li>
+        <li class="desafio">
+          <strong>Desafio:</strong> coloque um botão de remover dentro de cada
+          item.
+        </li>
+      </ol>
+
+      <input type="text" id="convidado" placeholder="Nome do convidado" />
+      <button id="adicionar">Adicionar</button>
+
+      <p class="saida" id="aviso"></p>
+
+      <ul id="lista"></ul>
+
+      <p class="dica">
+        O <code>&lt;li&gt;</code> não existe no HTML: alguém precisa criar,
+        preencher e só então colocar ele dentro da <code>&lt;ul&gt;</code>. São
+        três operações diferentes, o exemplo 04 da parte 02 usa as três.
+      </p>
+    </section>
+
+    <section>
+      <h2>Exercício 05 - Média do semestre</h2>
+
+      <p>
+        Aqui o que importa é a organização: as funções que calculam não podem
+        tocar no HTML, e a função que mexe no HTML não pode calcular nada.
+      </p>
+
+      <ol>
+        <li>
+          <code>calculaMedia()</code> recebe as três notas e devolve a média.
+        </li>
+        <li>
+          <code>situacao()</code> recebe a média e devolve o texto: Aprovado (7
+          ou mais), Recuperação (5 ou mais) ou Reprovado.
+        </li>
+        <li>
+          <code>mostrarResultado()</code> lê os campos, chama as duas funções
+          acima e escreve na tela.
+        </li>
+        <li class="desafio">
+          <strong>Desafio:</strong> quando estiver em recuperação, mostre
+          quantos pontos faltam para chegar no 7.
+        </li>
+      </ol>
+
+      <input type="number" id="nota1" placeholder="Nota 1" />
+      <input type="number" id="nota2" placeholder="Nota 2" />
+      <input type="number" id="nota3" placeholder="Nota 3" />
+      <button id="calcular">Calcular</button>
+
+      <p class="saida" id="resultado"></p>
+
+      <p class="dica">
+        Antes de escrever a lógica, faça um teste: digite 8 e 6 e mande somar os
+        dois campos sem converter nada. O resultado que aparecer explica por que
+        <code>Number()</code> existe. <br /><br />
+        E como as funções de cálculo não dependem da página, você consegue
+        conferir se elas estão certas antes mesmo de clicar no botão.
+      </p>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>
