@@ -80,10 +80,10 @@ página, disparando as funções com `onclick` no próprio HTML. Cada exemplo te
   um botão chamando uma função que faz `console.log`, ainda sem ler nada da página.
 - [Exemplo 02 — Saudação com cálculo de idade](aula-02/parte-02/exemplo-02/index.html) —
   `document.getElementById(...).value` para ler nome e ano de nascimento, `Number()` para
-  converter e `textContent` para escrever o resultado.
+  converter e `textContent` para escrever o resultado no console.
 - [Exemplo 03 — Calculadora](aula-02/parte-02/exemplo-03/index.html) — quatro funções
   (somar, subtrair, multiplicar, dividir), cada uma ligada a um botão, lendo dois campos
-  numéricos e escrevendo o resultado na tela.
+  numéricos e escrevendo o resultado no console.
 
 **Parte 03 — DOM: eventos**
 
