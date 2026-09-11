@@ -9,7 +9,7 @@ Repositório com os exercícios e exemplos desenvolvidos durante o curso de Java
 | Gabryel Bagio Bardini | [<img src="https://github.com/favicon.ico" width="16"/> ByelBardini](https://github.com/ByelBardini) |
 | Victor Oliveira Rodrigues | [<img src="https://github.com/favicon.ico" width="16"/> victolirodrigues](https://github.com/victolirodrigues) |
 
-## Estrutura
+## "Estrutura"
 
 O repositório é organizado por aula, uma pasta por encontro:
 

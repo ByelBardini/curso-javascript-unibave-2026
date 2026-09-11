@@ -12,7 +12,7 @@ git branch
 
 A branch atual aparece com um `*` na frente:
 
-```
+```"
   main
 * joao-silva
 ```
