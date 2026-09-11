@@ -16,9 +16,6 @@
 
     <!-- O HTML chama: onclick="saudacao()" -->
     <button onclick="saudacao()">Saudação</button>
-
-    <!-- Aqui será exibido o texto de saudação com a idade calculada -->
-    <p id="resultadoSaudacao"></p>
   </body>
 
   <script>
@@ -33,9 +30,8 @@
       // Calcula a idade com base no ano atual (2026)
       const idade = 2026 - nascimento;
 
-      // Exibe a saudação com nome e idade no parágrafo de resultado
-      document.getElementById("resultadoSaudacao").textContent =
-        `Olá, ${nome}, você deve ter ${idade} anos.`;
+      // Resultado no console
+      console.log(`Olá, ${nome}, você deve ter ${idade} anos.`);
     }
   </script>
 </html>
