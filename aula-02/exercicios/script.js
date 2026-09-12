@@ -9,11 +9,24 @@
 // Abra o console do navegador com F12 para ver a saída.
 // ============================================================
 
+const nome = 'Willyan'
+let idade = 19
+let matriculado = true
+
+console.log(`${nome} tem ${idade} anos e ${matriculado} matriculado`)
+
+idade = idade + 1
+
+console.log(`${nome} tem ${idade} anos e ${matriculado} matriculado`)
+
+console.log(typeof nome, typeof idade, typeof matriculado)
 // ============================================================
 // EXERCÍCIO 02 — Preço com desconto
 // ============================================================
 
 function calcularDesconto() {
+    const ahua = Number(document.getElementById("desconto").value) / 100
+    const desconto = ahua * Number(document.getElementById("preco").value)
 }
 
 document.getElementById("calcularDesconto").addEventListener("click", calcularDesconto);
