@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parte 03 - Lendo e alterando um arquivo JSON</title>
+  </head>
+  <body>
+    <h1>Estoque vindo de um arquivo JSON</h1>
+
+    <p>
+      <strong>Atenção:</strong> esta página precisa ser aberta pelo
+      <em>Live Server</em> do VS Code. Abrindo o arquivo com dois cliques
+      (<code>file://</code>) o navegador bloqueia a leitura do
+      <code>produtos.json</code> por segurança.
+    </p>
+
+    <button onclick="carregarArquivo()">1. Carregar produtos.json</button>
+
+    <hr />
+
+    <input type="text" id="campo-nome" placeholder="Nome do produto" />
+    <input type="number" id="campo-preco" placeholder="Novo preço" />
+
+    <button onclick="alterarPreco()">2. Alterar o preço</button>
+    <button onclick="aumentarEstoque()">2. Somar 10 no estoque</button>
+
+    <hr />
+
+    <button onclick="baixarArquivo()">3. Baixar o produtos.json alterado</button>
+
+    <hr />
+
+    <p id="mensagem"></p>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Preço</th>
+          <th>Quantidade</th>
+        </tr>
+      </thead>
+      <tbody id="corpo-tabela"></tbody>
+    </table>
+
+    <h2>Conteúdo atual do JSON</h2>
+    <pre id="json"></pre>
+  </body>
+  <script src="script.js"></script>
+</html>
