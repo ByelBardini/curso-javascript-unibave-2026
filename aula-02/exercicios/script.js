@@ -1,44 +1,191 @@
-// ============================================================
-// AULA 02 — EXERCÍCIOS
-// ============================================================
+const nome = "Alerrandro";
+let idade = 23;
+const matricula = true;
 
-// ============================================================
-// EXERCÍCIO 01 — Ficha do aluno (console)
-//
-// Este exercício não usa a página: só variáveis e console.log.
-// Abra o console do navegador com F12 para ver a saída.
-// ============================================================
+console.log(`${nome} tem ${idade} e possui matricula: ${matricula}`);
+console.log(`${nome} agora tem `, idade += 1);
+console.log(typeof nome);
+console.log(typeof idade);
+console.log(typeof matricula);
+//========================================================================================//
 
-// ============================================================
-// EXERCÍCIO 02 — Preço com desconto
-// ============================================================
 
-function calcularDesconto() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function mostrarFuncao(){
+    const preco = document.getElementById("preco").value;
+    const desconto = document.getElementById("desconto").value;
+
+     console.log("Preço:", preco);
+    console.log("Desconto:", desconto);
 }
+const botao = document.getElementById("calcularDesconto");
 
-document.getElementById("calcularDesconto").addEventListener("click", calcularDesconto);
+botao.addEventListener("onclik", mostrarFuncao());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ============================================================
 // EXERCÍCIO 03 — Contador de curtidas
 // ============================================================
 
-function curtir() {
+let contador = 0;
+const campo = document.getElementById("curtidas");
+
+function funcaoCurtir() {
+    contador += 1;
+    campo.textContent = "Curtidas: " + contador;
+    if(contador >= 10){
+        campo.style.color = "green";
+    }
 }
 
-function descurtir() {
+function descurtir(){
+    contador -= 1;
+    campo.textContent = "Curtidas: " + contador;
 }
 
-document.getElementById("curtir").addEventListener("click", curtir);
-document.getElementById("descurtir").addEventListener("click", descurtir);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ============================================================
 // EXERCÍCIO 04 — Lista de convidados
 // ============================================================
 
 function adicionarConvidado() {
+    const convidado = document.getElementById("convidado").value;//Input da DOM
+    const adicionar = document.getElementById("adicionar");//button da DOM
+     const lista = document.getElementById("lista-convidados");
+
+    if (convidado === "") {
+        console.log("O nome foi: null");
+        return; 
+    }
+
+   
 }
 
-document.getElementById("adicionar").addEventListener("click", adicionarConvidado);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ============================================================
 // EXERCÍCIO 05 — Média do semestre
@@ -57,4 +204,9 @@ function situacao(media) {
 function mostrarResultado() {
 }
 
-document.getElementById("calcular").addEventListener("click", mostrarResultado);
+
+
+
+
+
+

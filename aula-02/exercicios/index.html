@@ -73,7 +73,7 @@
 
       <input type="number" id="preco" placeholder="Preço" />
       <input type="number" id="desconto" placeholder="Desconto (%)" />
-      <button id="calcularDesconto">Calcular</button>
+      <button id="calcularDesconto" onclick="mostrarFuncao()">Calcular</button>
 
       <p class="saida" id="resultadoDesconto"></p>
 
@@ -96,8 +96,8 @@
         <li>Quando passar de 10 curtidas, deixe o número verde.</li>
       </ol>
 
-      <button id="curtir">Curtir</button>
-      <button id="descurtir">Descurtir</button>
+      <button id="curtir" onclick="funcaoCurtir()">Curtir</button>
+      <button id="descurtir" onclick="descurtir()">Descurtir</button>
 
       <p class="saida" id="curtidas">Curtidas: 0</p>
 
@@ -125,12 +125,63 @@
         </li>
       </ol>
 
-      <input type="text" id="convidado" placeholder="Nome do convidado" />
-      <button id="adicionar">Adicionar</button>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <input type="text" id="convidado" placeholder="Nome do convidado" />
+      <button id="adicionar" onclick=" adicionarConvidado()">Adicionar</button>
+      
       <p class="saida" id="aviso"></p>
 
       <ul id="lista"></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       <p class="dica">
         O <code>&lt;li&gt;</code> não existe no HTML: alguém precisa criar,
@@ -165,12 +216,90 @@
         </li>
       </ol>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
       <input type="number" id="nota1" placeholder="Nota 1" />
       <input type="number" id="nota2" placeholder="Nota 2" />
       <input type="number" id="nota3" placeholder="Nota 3" />
       <button id="calcular">Calcular</button>
 
       <p class="saida" id="resultado"></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       <p class="dica">
         Antes de escrever a lógica, faça um teste: digite 8 e 6 e mande somar os
