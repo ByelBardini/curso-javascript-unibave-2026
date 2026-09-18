@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exemplo 04 - Estoque de produtos</title>
+  </head>
+  <body>
+    <h1>Estoque de produtos</h1>
+
+    <input type="text" id="campo-nome" placeholder="Nome do produto" />
+    <input type="number" id="campo-preco" placeholder="Preço" />
+    <input type="number" id="campo-quantidade" placeholder="Quantidade" />
+
+    <button onclick="cadastrarProduto()">Cadastrar</button>
+
+    <hr />
+
+    <input type="text" id="campo-busca" placeholder="Nome do produto" />
+
+    <button onclick="buscarProduto()">Buscar</button>
+    <button onclick="venderProduto()">Vender 1 unidade</button>
+    <button onclick="reporProduto()">Repor 1 unidade</button>
+    <button onclick="removerProduto()">Remover do estoque</button>
+
+    <hr />
+
+    <p id="mensagem"></p>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>Preço</th>
+          <th>Quantidade</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody id="corpo-tabela"></tbody>
+    </table>
+
+    <p id="total"></p>
+  </body>
+  <script src="script.js"></script>
+</html>
