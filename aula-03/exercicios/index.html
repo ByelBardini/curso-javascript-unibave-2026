@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aula 03 - Exercícios</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Aula 03 - Exercícios</h1>
+    <p>O código vai no arquivo <code>script.js</code>.</p>
+
+    <section>
+      <h2>Exercício 01 - Notas da turma (console)</h2>
+
+      <p>
+        Este exercício não mexe na página: tudo acontece no
+        <code>console.log</code>. Abra o console do navegador com
+        <code>F12</code> para ver a saída.
+      </p>
+
+      <ol>
+        <li>
+          Crie um array <code>notas</code> com pelo menos cinco números e mostre
+          o array inteiro no console.
+        </li>
+        <li>
+          Mostre a primeira nota, a última (sem escrever o número da posição na
+          mão) e quantas notas existem.
+        </li>
+        <li>
+          Percorra o array com <code>for</code> e mostre cada nota no formato
+          <code>Nota 1: 8.5</code> (o aluno conta a partir do 1, o array não).
+        </li>
+        <li>Some todas as notas e mostre a média com duas casas decimais.</li>
+        <li class="desafio">
+          <strong>Desafio:</strong> descubra a maior e a menor nota do array
+          usando só <code>for</code> e <code>if</code>.
+        </li>
+      </ol>
+
+      <p class="dica">
+        Para a média você precisa de uma variável que sobreviva entre as voltas
+        do laço: ela nasce antes do <code>for</code>, não dentro dele. No
+        desafio, pense em quem é o "maior" antes de a primeira comparação
+        acontecer.
+      </p>
+    </section>
+
+    <section>
+      <h2>Exercício 02 - Lista de tarefas</h2>
+
+      <p>
+        O array é a fonte da verdade: ninguém mexe na <code>&lt;ul&gt;</code>
+        direto, a tela é sempre redesenhada a partir do array.
+      </p>
+
+      <ol>
+        <li>
+          Crie o array <code>tarefas</code> (vazio) e a função
+          <code>atualizarTela()</code>, que recria um
+          <code>&lt;li&gt;</code> para cada item, no formato
+          <code>[0] estudar</code>.
+        </li>
+        <li>
+          O botão adicionar coloca a tarefa digitada no fim do array
+          (<code>push</code>) e chama <code>atualizarTela()</code>.
+        </li>
+        <li>
+          Não deixe adicionar tarefa vazia nem uma tarefa que já está na lista.
+          O aviso vai no parágrafo de saída.
+        </li>
+        <li>
+          O botão concluir remove a última tarefa (<code>pop</code>) e avisa
+          qual foi removida.
+        </li>
+        <li>
+          O botão de remover por posição usa <code>splice</code>, mas só depois
+          de conferir se a posição digitada existe.
+        </li>
+        <li class="desafio">
+          <strong>Desafio:</strong> mostre embaixo da lista quantas tarefas
+          existem e, quando o array estiver vazio, escreva
+          <code>Nenhuma tarefa por enquanto</code>.
+        </li>
+      </ol>
+
+      <input type="text" id="tarefa" placeholder="Nova tarefa" />
+      <button id="adicionarTarefa">Adicionar</button>
+      <button id="concluirTarefa">Concluir a última</button>
+
+      <br /><br />
+
+      <input type="number" id="posicaoTarefa" placeholder="Posição" />
+      <button id="removerTarefa">Remover posição</button>
+
+      <p class="saida" id="avisoTarefa"></p>
+
+      <ul id="listaTarefas"></ul>
+
+      <p class="saida" id="totalTarefas"></p>
+
+      <p class="dica">
+        Antes de criar os <code>&lt;li&gt;</code> novos, o que acontece com os
+        antigos? Se a lista for crescendo em dobro a cada clique, está faltando
+        uma linha no começo do <code>atualizarTela()</code>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Exercício 03 - Ficha do produto (console)</h2>
+
+      <p>
+        De volta ao console: aqui o assunto é objeto, e a página continua
+        parada.
+      </p>
+
+      <ol>
+        <li>
+          Crie um objeto <code>produto</code> com as propriedades
+          <code>nome</code>, <code>preco</code>, <code>quantidade</code> e
+          <code>disponivel</code>.
+        </li>
+        <li>
+          Mostre o nome usando ponto, o preço usando colchetes e o que aparece
+          ao acessar uma propriedade que não existe.
+        </li>
+        <li>
+          Dê um desconto de 10% no preço e crie a propriedade
+          <code>categoria</code> em um objeto que já estava pronto.
+        </li>
+        <li>
+          Percorra o objeto com <code>for...in</code> e mostre cada propriedade
+          no formato <code>preco = 3150</code>.
+        </li>
+        <li>
+          Faça uma cópia do produto com <code>{ ... }</code>, mude o preço da
+          cópia e mostre os dois no console para provar que o original ficou
+          como estava.
+        </li>
+        <li class="desafio">
+          <strong>Desafio:</strong> adicione a propriedade
+          <code>fabricante</code>, que é outro objeto com <code>nome</code> e
+          <code>cidade</code>, e mostre só a cidade no console.
+        </li>
+      </ol>
+
+      <p class="dica">
+        Se depois de mudar a cópia o original também mudou, o que você fez foi
+        dar outro nome para o mesmo objeto, e não copiar. Compare com o exemplo
+        03 da parte 02.
+      </p>
+    </section>
+
+    <section>
+      <h2>Exercício 04 - Cadastro de filmes</h2>
+
+      <p>
+        Junta as duas metades da aula: um array onde cada item é um objeto, com
+        a tabela redesenhada a cada mudança.
+      </p>
+
+      <ol>
+        <li>
+          Crie o array <code>filmes</code> já com dois filmes. Cada filme é um
+          objeto com <code>titulo</code>, <code>ano</code> e <code>nota</code>.
+        </li>
+        <li>
+          <code>atualizarTabela()</code> percorre o array e monta uma linha
+          (<code>&lt;tr&gt;</code>) por filme, com uma quarta coluna calculada
+          por você: <code>Bom</code> quando a nota for 7 ou mais,
+          <code>Ruim</code> quando for menor.
+        </li>
+        <li>
+          O botão cadastrar lê os três campos, monta o objeto e coloca no array.
+          Não deixe cadastrar com título vazio nem com um título repetido.
+        </li>
+        <li>
+          <code>procurarPorTitulo()</code> percorre o array e devolve o objeto
+          encontrado ou <code>null</code>. Ela não pode mexer na tela.
+        </li>
+        <li>
+          O botão buscar usa essa função e mostra os dados do filme na saída; o
+          botão remover usa <code>splice</code> na posição do filme encontrado.
+        </li>
+        <li class="desafio">
+          <strong>Desafio:</strong> mostre embaixo da tabela a média das notas e
+          o título do filme com a maior nota.
+        </li>
+      </ol>
+
+      <input type="text" id="titulo" placeholder="Título" />
+      <input type="number" id="ano" placeholder="Ano" />
+      <input type="number" id="nota" placeholder="Nota" />
+      <button id="cadastrarFilme">Cadastrar</button>
+
+      <br /><br />
+
+      <input type="text" id="buscaFilme" placeholder="Título" />
+      <button id="buscarFilme">Buscar</button>
+      <button id="removerFilme">Remover</button>
+
+      <p class="saida" id="avisoFilme"></p>
+
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Ano</th>
+            <th>Nota</th>
+            <th>Situação</th>
+          </tr>
+        </thead>
+        <tbody id="corpoFilmes"></tbody>
+      </table>
+
+      <p class="saida" id="resumoFilmes"></p>
+
+      <p class="dica">
+        A busca por um objeto não é com <code>includes()</code>: dois objetos
+        com o mesmo conteúdo não são iguais para o JavaScript. Compare uma
+        <strong>propriedade</strong> de cada item dentro de um <code>for</code>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Exercício 05 - Boletim em JSON</h2>
+
+      <p>
+        Os dados não estão mais no código: eles vêm do arquivo
+        <code>alunos.json</code>, que está na mesma pasta.
+        <strong>Abra esta página pelo Live Server</strong>, senão o navegador
+        bloqueia a leitura do arquivo.
+      </p>
+
+      <ol>
+        <li>
+          <code>carregarAlunos()</code> lê o arquivo com <code>fetch</code> e
+          <code>await</code>, guarda o resultado no array <code>alunos</code> e
+          desenha a lista na tela.
+        </li>
+        <li>
+          Mostre no console quantos alunos vieram e o nome do primeiro, para
+          conferir que o arquivo virou mesmo um array de objetos.
+        </li>
+        <li>
+          O botão de correção soma 1 ponto na nota do aluno digitado, sem passar
+          de 10. Se o nome não existir, mostre um aviso.
+        </li>
+        <li>
+          Mostre na tela, além da lista, a média da turma e quantos alunos estão
+          aprovados (nota 7 ou mais).
+        </li>
+        <li>
+          O botão baixar transforma o array de volta em texto com
+          <code>JSON.stringify</code> (indentado com 2 espaços) e entrega o
+          arquivo para download.
+        </li>
+        <li class="desafio">
+          <strong>Desafio:</strong> antes de baixar, acrescente em cada aluno a
+          propriedade <code>situacao</code>, com <code>Aprovado</code> ou
+          <code>Reprovado</code>, e confira no arquivo baixado se ela apareceu.
+        </li>
+      </ol>
+
+      <button id="carregarAlunos">Carregar alunos.json</button>
+
+      <br /><br />
+
+      <input type="text" id="alunoNome" placeholder="Nome do aluno" />
+      <button id="corrigirNota">Somar 1 ponto</button>
+      <button id="baixarBoletim">Baixar boletim</button>
+
+      <p class="saida" id="avisoAluno"></p>
+
+      <ul id="listaAlunos"></ul>
+
+      <p class="saida" id="resumoAlunos"></p>
+
+      <p class="dica">
+        Ler um arquivo demora, por isso a função é <code>async</code> e o
+        <code>fetch</code> vem com <code>await</code>. Sem o <code>await</code>,
+        o código segue em frente antes de os dados chegarem e o array aparece
+        vazio.
+      </p>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>

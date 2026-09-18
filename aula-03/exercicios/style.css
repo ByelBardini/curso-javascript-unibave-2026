@@ -1,0 +1,59 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+section {
+  border: 1px solid #ccc;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+code {
+  background-color: #eef1f5;
+  color: #b0306b;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 0.95em;
+}
+
+.dica {
+  background-color: #f2f2f2;
+  border-left: 3px solid #999;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+li.desafio {
+  background-color: #fff7e6;
+  border-left: 3px solid #e0a030;
+  padding: 6px 10px;
+  border-radius: 0 4px 4px 0;
+  margin-top: 8px;
+}
+
+li.desafio::marker {
+  color: #a06800;
+}
+
+li.desafio strong {
+  color: #a06800;
+}
+
+input,
+button {
+  padding: 5px;
+  font-size: 14px;
+}
+
+.saida {
+  font-weight: bold;
+}
