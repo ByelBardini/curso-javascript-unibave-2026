@@ -222,68 +222,6 @@
         <strong>propriedade</strong> de cada item dentro de um <code>for</code>.
       </p>
     </section>
-
-    <section>
-      <h2>Exercício 05 - Boletim em JSON</h2>
-
-      <p>
-        Os dados não estão mais no código: eles vêm do arquivo
-        <code>alunos.json</code>, que está na mesma pasta.
-        <strong>Abra esta página pelo Live Server</strong>, senão o navegador
-        bloqueia a leitura do arquivo.
-      </p>
-
-      <ol>
-        <li>
-          <code>carregarAlunos()</code> lê o arquivo com <code>fetch</code> e
-          <code>await</code>, guarda o resultado no array <code>alunos</code> e
-          desenha a lista na tela.
-        </li>
-        <li>
-          Mostre no console quantos alunos vieram e o nome do primeiro, para
-          conferir que o arquivo virou mesmo um array de objetos.
-        </li>
-        <li>
-          O botão de correção soma 1 ponto na nota do aluno digitado, sem passar
-          de 10. Se o nome não existir, mostre um aviso.
-        </li>
-        <li>
-          Mostre na tela, além da lista, a média da turma e quantos alunos estão
-          aprovados (nota 7 ou mais).
-        </li>
-        <li>
-          O botão baixar transforma o array de volta em texto com
-          <code>JSON.stringify</code> (indentado com 2 espaços) e entrega o
-          arquivo para download.
-        </li>
-        <li class="desafio">
-          <strong>Desafio:</strong> antes de baixar, acrescente em cada aluno a
-          propriedade <code>situacao</code>, com <code>Aprovado</code> ou
-          <code>Reprovado</code>, e confira no arquivo baixado se ela apareceu.
-        </li>
-      </ol>
-
-      <button id="carregarAlunos">Carregar alunos.json</button>
-
-      <br /><br />
-
-      <input type="text" id="alunoNome" placeholder="Nome do aluno" />
-      <button id="corrigirNota">Somar 1 ponto</button>
-      <button id="baixarBoletim">Baixar boletim</button>
-
-      <p class="saida" id="avisoAluno"></p>
-
-      <ul id="listaAlunos"></ul>
-
-      <p class="saida" id="resumoAlunos"></p>
-
-      <p class="dica">
-        Ler um arquivo demora, por isso a função é <code>async</code> e o
-        <code>fetch</code> vem com <code>await</code>. Sem o <code>await</code>,
-        o código segue em frente antes de os dados chegarem e o array aparece
-        vazio.
-      </p>
-    </section>
     <script src="script.js"></script>
   </body>
 </html>

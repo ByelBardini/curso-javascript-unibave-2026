@@ -42,24 +42,3 @@
 //   buscaFilme, buscarFilme, removerFilme,
 //   avisoFilme, corpoFilmes, resumoFilmes
 // ============================================================
-
-// ============================================================
-// EXERCÍCIO 05 — Boletim em JSON
-//
-// ATENÇÃO: abra a página pelo Live Server, senão o fetch do
-// alunos.json é bloqueado pelo navegador.
-//
-// Campos e botões desta seção:
-//   carregarAlunos, alunoNome, corrigirNota, baixarBoletim,
-//   avisoAluno, listaAlunos, resumoAlunos
-//
-// Lembrete do download (o navegador não grava por cima do
-// arquivo original, ele só oferece um arquivo novo):
-//
-//   const texto = JSON.stringify(alunos, null, 2);
-//   const arquivo = new Blob([texto], { type: "application/json" });
-//   const link = document.createElement("a");
-//   link.href = URL.createObjectURL(arquivo);
-//   link.download = "alunos.json";
-//   link.click();
-// ============================================================

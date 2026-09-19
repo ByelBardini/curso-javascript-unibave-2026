@@ -165,17 +165,6 @@ parte 01, agora guardando mais de uma informação por item. Cada exemplo tem um
   `atualizarTela()` redesenha a tabela a cada mudança e a busca passa a ser por uma
   propriedade (`procurarPorNome()`) no lugar do `includes()`.
 
-**Parte 03 — JSON**
-
-Onde os dados passam a vir de fora do código.
-
-- [Exemplo 01 — Lendo e alterando um arquivo JSON](aula-03/parte-03/exemplo-01/index.html) —
-  o mesmo estoque, agora carregado de um [produtos.json](aula-03/parte-03/exemplo-01/produtos.json)
-  com `fetch()` e `async/await`, alterado na memória como qualquer array de objetos e
-  devolvido como arquivo novo com `JSON.stringify()` + download. Fecha com `JSON.parse()` e
-  com o motivo de o navegador não gravar por cima do arquivo original. Precisa ser aberto
-  pelo Live Server.
-
 **Exercícios**
 
 - [Exercícios da aula](aula-03/exercicios/index.html) — cinco exercícios em um arquivo só,
@@ -184,8 +173,7 @@ Onde os dados passam a vir de fora do código.
   `for`) e o 02 monta uma lista de tarefas com o array como fonte da verdade. Os dois
   seguintes são de objeto: o 03 volta ao console (ponto vs. colchetes, `for...in`, cópia
   com spread) e o 04 junta tudo em um cadastro de filmes com array de objetos e busca por
-  propriedade. O 05 carrega o [alunos.json](aula-03/exercicios/alunos.json) com `fetch`,
-  altera as notas e devolve o arquivo com `JSON.stringify()`.
+  propriedade.
 
 ### Aula 04 — _em breve_
 ### Aula 05 — _em breve_
