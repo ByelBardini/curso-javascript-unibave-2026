@@ -167,7 +167,7 @@ parte 01, agora guardando mais de uma informação por item. Cada exemplo tem um
 
 **Exercícios**
 
-- [Exercícios da aula](aula-03/exercicios/index.html) — cinco exercícios em um arquivo só,
+- [Exercícios da aula](aula-03/exercicios/index.html) — quatro exercícios em um arquivo só,
   com o código a ser escrito em [script.js](aula-03/exercicios/script.js). Os dois
   primeiros são de array: o 01 fica só no `console.log` (índices, `length`, média com
   `for`) e o 02 monta uma lista de tarefas com o array como fonte da verdade. Os dois
@@ -175,7 +175,60 @@ parte 01, agora guardando mais de uma informação por item. Cada exemplo tem um
   com spread) e o 04 junta tudo em um cadastro de filmes com array de objetos e busca por
   propriedade.
 
-### Aula 04 — _em breve_
+### Aula 04 — JSON, APIs e AJAX
+
+**Parte 01 — Lendo e alterando um arquivo JSON**
+
+O estoque da aula 03 agora vem de um arquivo. Precisa ser aberta pelo _Live Server_ do
+VS Code: abrindo com dois cliques (`file://`) o navegador bloqueia a leitura do JSON.
+
+- [Estoque vindo de um arquivo JSON](aula-04/parte-01/index.html) — as regras do formato
+  JSON (chaves e textos com aspas duplas, sem vírgula sobrando, sem comentários), leitura do
+  [produtos.json](aula-04/parte-01/produtos.json) com `fetch()` + `async`/`await` e
+  `.json()`, alteração do array na memória com o mesmo `procurarPorNome()` da aula 03 e o
+  caminho de volta com `JSON.stringify()`, gerando um download com `Blob` (o navegador não
+  deixa o JavaScript gravar por cima do arquivo). Fecha com `JSON.parse()` no console.
+
+**Parte 02 — Consumindo APIs**
+
+O mesmo `fetch()` da parte 01, agora apontando para um servidor. Os exemplos não mexem na
+página: tudo é observado no console. Cada exemplo tem um `index.html` e um `script.js`
+separado.
+
+- [Exemplo 01 — Buscando dados de uma API (GET)](aula-04/parte-02/exemplo-01/index.html) —
+  o que é uma API e o GET como padrão do `fetch()`, usando a
+  [BrasilAPI](https://brasilapi.com.br/docs): CEP, cidades de um DDD, feriados nacionais
+  percorridos com `for...of`, estado e municípios do IBGE (objeto dentro de objeto), banco
+  pelo código e empresa pelo CNPJ.
+- [Exemplo 02 — Tratando erros e trabalhando com as respostas](aula-04/parte-02/exemplo-02/index.html) —
+  `resposta.ok` e `resposta.status` (200, 400, 404, 500), `try`/`catch` para quando não há
+  resposta, uma chamada usando o resultado da anterior (CEP → estado), filtros e contadores
+  em cima dos dados recebidos e conversão de dólar com a cotação do dia.
+- [Exemplo 03 — CRUD completo com uma API que salva de verdade](aula-04/parte-02/exemplo-03/index.html) —
+  os métodos HTTP (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`) com a
+  [restful-api.dev](https://restful-api.dev): o segundo parâmetro do `fetch()` com
+  `method`, `headers` e `body` com `JSON.stringify()`, o `id` gerado pelo servidor, a
+  diferença entre `PUT` (substitui tudo) e `PATCH` (só os campos enviados) e um GET depois
+  de cada passo para conferir o que foi salvo.
+
+**Parte 03 — AJAX**
+
+- [Buscar CEP](aula-04/parte-03/index.html) — AJAX como `fetch()` + DOM: o usuário digita
+  o CEP, a BrasilAPI responde e os campos (`readonly`) de rua, bairro, cidade e estado são
+  preenchidos sem recarregar a página.
+
+**Exercícios**
+
+- [Exercícios da aula](aula-04/exercicios/index.html) — três exercícios em um arquivo só,
+  um para cada parte, com o código a ser escrito em [script.js](aula-04/exercicios/script.js).
+  Precisa ser aberto pelo _Live Server_. O 01 lê o [livros.json](aula-04/exercicios/livros.json)
+  com `fetch()`, controla empréstimos e cadastro em cima do array e baixa o arquivo alterado,
+  com o desafio de importar um JSON colado na página usando `JSON.parse()` e `try`/`catch`.
+  O 02 fica no console: uma função auxiliar de GET com tratamento de erro, consultas na
+  BrasilAPI (bancos e feriados) e um CRUD completo na restful-api.dev. O 03 é AJAX: consulta
+  de DDD com validação antes do `fetch()`, botão desabilitado durante a busca, mensagem de
+  erro da API e um filtro de cidades pelo evento `input` que não chama a API de novo.
+
 ### Aula 05 — _em breve_
 ### Aula 06 — _em breve_
 ### Aula 07 — _em breve_
