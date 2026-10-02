@@ -1,0 +1,7 @@
+[
+  { "titulo": "Dom Casmurro", "autor": "Machado de Assis", "ano": 1899, "disponivel": true },
+  { "titulo": "O Cortiço", "autor": "Aluísio Azevedo", "ano": 1890, "disponivel": false },
+  { "titulo": "Vidas Secas", "autor": "Graciliano Ramos", "ano": 1938, "disponivel": true },
+  { "titulo": "Capitães da Areia", "autor": "Jorge Amado", "ano": 1937, "disponivel": true },
+  { "titulo": "A Hora da Estrela", "autor": "Clarice Lispector", "ano": 1977, "disponivel": false }
+]
