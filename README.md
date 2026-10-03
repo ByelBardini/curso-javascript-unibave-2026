@@ -4,9 +4,9 @@ Repositório com os exercícios e exemplos desenvolvidos durante o curso de Java
 
 ## Professores
 
-| Nome | GitHub |
-|------|--------|
-| Gabryel Bagio Bardini | [<img src="https://github.com/favicon.ico" width="16"/> ByelBardini](https://github.com/ByelBardini) |
+| Nome                      | GitHub                                                                                                         |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Gabryel Bagio Bardini     | [<img src="https://github.com/favicon.ico" width="16"/> ByelBardini](https://github.com/ByelBardini)           |
 | Victor Oliveira Rodrigues | [<img src="https://github.com/favicon.ico" width="16"/> victolirodrigues](https://github.com/victolirodrigues) |
 
 ## Estrutura
@@ -175,7 +175,7 @@ parte 01, agora guardando mais de uma informação por item. Cada exemplo tem um
   com spread) e o 04 junta tudo em um cadastro de filmes com array de objetos e busca por
   propriedade.
 
-### Aula 04 — JSON, APIs e AJAX
+### Aula 04 — JSON e APIs
 
 **Parte 01 — Lendo e alterando um arquivo JSON**
 
@@ -211,25 +211,20 @@ separado.
   diferença entre `PUT` (substitui tudo) e `PATCH` (só os campos enviados) e um GET depois
   de cada passo para conferir o que foi salvo.
 
-**Parte 03 — AJAX**
-
-- [Buscar CEP](aula-04/parte-03/index.html) — AJAX como `fetch()` + DOM: o usuário digita
-  o CEP, a BrasilAPI responde e os campos (`readonly`) de rua, bairro, cidade e estado são
-  preenchidos sem recarregar a página.
-
 **Exercícios**
 
-- [Exercícios da aula](aula-04/exercicios/index.html) — três exercícios em um arquivo só,
+- [Exercícios da aula](aula-04/exercicios/index.html) — dois exercícios em um arquivo só,
   um para cada parte, com o código a ser escrito em [script.js](aula-04/exercicios/script.js).
   Precisa ser aberto pelo _Live Server_. O 01 lê o [livros.json](aula-04/exercicios/livros.json)
   com `fetch()`, controla empréstimos e cadastro em cima do array e baixa o arquivo alterado,
   com o desafio de importar um JSON colado na página usando `JSON.parse()` e `try`/`catch`.
   O 02 fica no console: uma função auxiliar de GET com tratamento de erro, consultas na
-  BrasilAPI (bancos e feriados) e um CRUD completo na restful-api.dev. O 03 é AJAX: consulta
-  de DDD com validação antes do `fetch()`, botão desabilitado durante a busca, mensagem de
-  erro da API e um filtro de cidades pelo evento `input` que não chama a API de novo.
+  BrasilAPI (bancos e feriados) e um CRUD completo na restful-api.dev.
 
 ### Aula 05 — _em breve_
+
 ### Aula 06 — _em breve_
+
 ### Aula 07 — _em breve_
+
 ### Aula 08 — _em breve_
