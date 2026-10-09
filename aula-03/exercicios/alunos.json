@@ -1,0 +1,7 @@
+[
+  { "nome": "Ana", "idade": 20, "nota": 8.5 },
+  { "nome": "Bruno", "idade": 22, "nota": 6 },
+  { "nome": "Carla", "idade": 19, "nota": 9.75 },
+  { "nome": "Daniel", "idade": 25, "nota": 4.5 },
+  { "nome": "Eduarda", "idade": 21, "nota": 10 }
+]

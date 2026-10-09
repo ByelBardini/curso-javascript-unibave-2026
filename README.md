@@ -119,8 +119,116 @@ separada do que mexe na tela.
   campo, converter com `Number()` e escrever com `textContent`, o 03 e o 04 praticam DOM e
   o 05 cobra a separação entre as funções de cálculo e a função que escreve na página.
 
-### Aula 03 — _em breve_
-### Aula 04 — _em breve_
+### Aula 03 — Arrays, objetos e JSON
+
+**Parte 01 — Arrays**
+
+Do primeiro `console.log` de um array até uma lista interativa na página. Cada exemplo tem
+um `index.html` e um `script.js` separado.
+
+- [Exemplo 01 — Arrays no console](aula-03/parte-01/exemplo-01/index.html) — o que é um
+  array, acesso por índice (começando em 0), `length`, o último item com `length - 1`,
+  `typeof` devolvendo `object` e `Array.isArray()` para confirmar.
+- [Exemplo 02 — Percorrendo e escrevendo na página](aula-03/parte-01/exemplo-02/index.html) —
+  três formas de percorrer e exibir: `for` com índice montando `<li>` com
+  `createElement`/`appendChild`, `for...of` no console e uma string de HTML jogada de uma
+  vez no `innerHTML`.
+- [Exemplo 03 — Métodos de array](aula-03/parte-01/exemplo-03/index.html) — `push()`,
+  `pop()`, `shift()`, `unshift()`, `splice()` (removendo, trocando e inserindo) e
+  `includes()`, com o valor de retorno de cada um e a observação de que um array `const`
+  tem o conteúdo alterado do mesmo jeito.
+- [Exemplo 04 — Lista de compras interativa](aula-03/parte-01/exemplo-04/index.html) —
+  os métodos da aula ligados a botões: o array é a fonte da verdade e uma função
+  `atualizarTela()` redesenha a lista a cada mudança, com `includes()` barrando itens
+  repetidos e validação de posição antes do `splice()`.
+
+**Parte 02 — Objetos**
+
+Do objeto solto no console até um estoque interativo. Os exemplos partem dos mesmos da
+parte 01, agora guardando mais de uma informação por item. Cada exemplo tem um
+`index.html` e um `script.js` separado.
+
+- [Exemplo 01 — Objetos no console](aula-03/parte-02/exemplo-01/index.html) — o que é um
+  objeto, acesso por ponto e por colchetes, propriedade inexistente devolvendo `undefined`,
+  alterar/criar/`delete` de propriedades, `typeof` devolvendo `object` igual ao array e
+  objetos com array e outro objeto dentro.
+- [Exemplo 02 — Array de objetos na página](aula-03/parte-02/exemplo-02/index.html) — a
+  lista de alunos da parte 01 com nome, idade e nota em cada item: `for` com índice
+  montando `<li>`, `for...of` calculando a média da turma e uma tabela montada com
+  `innerHTML`, com a situação calculada a partir da nota.
+- [Exemplo 03 — Percorrer, copiar e buscar](aula-03/parte-02/exemplo-03/index.html) —
+  `Object.keys()`, `Object.values()`, `Object.entries()`, o laço `for...in`, a diferença
+  entre o `=` (que dá outro nome ao mesmo objeto) e a cópia com spread `{ ... }`, e busca,
+  filtro e soma dentro de um array de objetos.
+- [Exemplo 04 — Estoque de produtos](aula-03/parte-02/exemplo-04/index.html) — a lista
+  interativa da parte 01 virando um cadastro: o array de objetos é a fonte da verdade,
+  `atualizarTela()` redesenha a tabela a cada mudança e a busca passa a ser por uma
+  propriedade (`procurarPorNome()`) no lugar do `includes()`.
+
+**Exercícios**
+
+- [Exercícios da aula](aula-03/exercicios/index.html) — quatro exercícios em um arquivo só,
+  com o código a ser escrito em [script.js](aula-03/exercicios/script.js). Os dois
+  primeiros são de array: o 01 fica só no `console.log` (índices, `length`, média com
+  `for`) e o 02 monta uma lista de tarefas com o array como fonte da verdade. Os dois
+  seguintes são de objeto: o 03 volta ao console (ponto vs. colchetes, `for...in`, cópia
+  com spread) e o 04 junta tudo em um cadastro de filmes com array de objetos e busca por
+  propriedade.
+
+### Aula 04 — JSON, APIs e AJAX
+
+**Parte 01 — Lendo e alterando um arquivo JSON**
+
+O estoque da aula 03 agora vem de um arquivo. Precisa ser aberta pelo _Live Server_ do
+VS Code: abrindo com dois cliques (`file://`) o navegador bloqueia a leitura do JSON.
+
+- [Estoque vindo de um arquivo JSON](aula-04/parte-01/index.html) — as regras do formato
+  JSON (chaves e textos com aspas duplas, sem vírgula sobrando, sem comentários), leitura do
+  [produtos.json](aula-04/parte-01/produtos.json) com `fetch()` + `async`/`await` e
+  `.json()`, alteração do array na memória com o mesmo `procurarPorNome()` da aula 03 e o
+  caminho de volta com `JSON.stringify()`, gerando um download com `Blob` (o navegador não
+  deixa o JavaScript gravar por cima do arquivo). Fecha com `JSON.parse()` no console.
+
+**Parte 02 — Consumindo APIs**
+
+O mesmo `fetch()` da parte 01, agora apontando para um servidor. Os exemplos não mexem na
+página: tudo é observado no console. Cada exemplo tem um `index.html` e um `script.js`
+separado.
+
+- [Exemplo 01 — Buscando dados de uma API (GET)](aula-04/parte-02/exemplo-01/index.html) —
+  o que é uma API e o GET como padrão do `fetch()`, usando a
+  [BrasilAPI](https://brasilapi.com.br/docs): CEP, cidades de um DDD, feriados nacionais
+  percorridos com `for...of`, estado e municípios do IBGE (objeto dentro de objeto), banco
+  pelo código e empresa pelo CNPJ.
+- [Exemplo 02 — Tratando erros e trabalhando com as respostas](aula-04/parte-02/exemplo-02/index.html) —
+  `resposta.ok` e `resposta.status` (200, 400, 404, 500), `try`/`catch` para quando não há
+  resposta, uma chamada usando o resultado da anterior (CEP → estado), filtros e contadores
+  em cima dos dados recebidos e conversão de dólar com a cotação do dia.
+- [Exemplo 03 — CRUD completo com uma API que salva de verdade](aula-04/parte-02/exemplo-03/index.html) —
+  os métodos HTTP (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`) com a
+  [restful-api.dev](https://restful-api.dev): o segundo parâmetro do `fetch()` com
+  `method`, `headers` e `body` com `JSON.stringify()`, o `id` gerado pelo servidor, a
+  diferença entre `PUT` (substitui tudo) e `PATCH` (só os campos enviados) e um GET depois
+  de cada passo para conferir o que foi salvo.
+
+**Parte 03 — AJAX**
+
+- [Buscar CEP](aula-04/parte-03/index.html) — AJAX como `fetch()` + DOM: o usuário digita
+  o CEP, a BrasilAPI responde e os campos (`readonly`) de rua, bairro, cidade e estado são
+  preenchidos sem recarregar a página.
+
+**Exercícios**
+
+- [Exercícios da aula](aula-04/exercicios/index.html) — três exercícios em um arquivo só,
+  um para cada parte, com o código a ser escrito em [script.js](aula-04/exercicios/script.js).
+  Precisa ser aberto pelo _Live Server_. O 01 lê o [livros.json](aula-04/exercicios/livros.json)
+  com `fetch()`, controla empréstimos e cadastro em cima do array e baixa o arquivo alterado,
+  com o desafio de importar um JSON colado na página usando `JSON.parse()` e `try`/`catch`.
+  O 02 fica no console: uma função auxiliar de GET com tratamento de erro, consultas na
+  BrasilAPI (bancos e feriados) e um CRUD completo na restful-api.dev. O 03 é AJAX: consulta
+  de DDD com validação antes do `fetch()`, botão desabilitado durante a busca, mensagem de
+  erro da API e um filtro de cidades pelo evento `input` que não chama a API de novo.
+
 ### Aula 05 — _em breve_
 ### Aula 06 — _em breve_
 ### Aula 07 — _em breve_

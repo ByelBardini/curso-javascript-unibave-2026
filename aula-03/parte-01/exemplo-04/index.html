@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exemplo 04 - Lista de compras interativa</title>
+  </head>
+  <body>
+    <h1>Lista de compras</h1>
+
+    <input type="text" id="campo-item" placeholder="Digite um item" />
+
+    <button onclick="adicionarNoFim()">Adicionar no fim (push)</button>
+    <button onclick="adicionarNoComeco()">Adicionar no começo (unshift)</button>
+    <button onclick="verificarItem()">Verificar se existe (includes)</button>
+
+    <hr />
+
+    <button onclick="removerDoFim()">Remover do fim (pop)</button>
+    <button onclick="removerDoComeco()">Remover do começo (shift)</button>
+    <button onclick="limparLista()">Limpar tudo</button>
+
+    <hr />
+
+    <input type="number" id="campo-posicao" placeholder="Posição" />
+    <button onclick="removerPorPosicao()">Remover posição (splice)</button>
+
+    <hr />
+
+    <p id="mensagem"></p>
+
+    <ul id="lista"></ul>
+
+    <p id="total"></p>
+  </body>
+  <script src="script.js"></script>
+</html>

@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aula 04 - Exercícios</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Aula 04 - Exercícios</h1>
+    <p>O código vai no arquivo <code>script.js</code>.</p>
+    <p>
+      <strong>Abra esta página pelo Live Server</strong> do VS Code. Com dois
+      cliques (<code>file://</code>) o navegador bloqueia a leitura do
+      <code>livros.json</code> do exercício 01.
+    </p>
+
+    <section>
+      <h2>Exercício 01 - Biblioteca em JSON</h2>
+
+      <p>
+        Os livros não estão no código: eles vêm do arquivo
+        <code>livros.json</code>, que está na mesma pasta. Depois de lido, o
+        arquivo vira um array de objetos comum, e ele passa a ser a fonte da
+        verdade da tela.
+      </p>
+
+      <ol>
+        <li>
+          <code>carregarLivros()</code> lê o arquivo com <code>fetch</code> e
+          <code>await</code>, guarda o resultado no array <code>livros</code> e
+          chama <code>atualizarTela()</code>. Mostre no console quantos livros
+          vieram.
+        </li>
+        <li>
+          <code>atualizarTela()</code> monta uma linha da tabela por livro (a
+          coluna situação mostra <code>Disponível</code> ou
+          <code>Emprestado</code>), escreve o resumo
+          (<code>5 livros | 3 disponíveis | 2 emprestados</code>) e mostra no
+          <code>&lt;pre&gt;</code> o texto que o array viraria com
+          <code>JSON.stringify</code>.
+        </li>
+        <li>
+          <code>procurarPorTitulo()</code> devolve o livro ou
+          <code>null</code>, sem mexer na tela. Use essa função nos botões
+          emprestar e devolver, que trocam o <code>disponivel</code>. Não deixe
+          emprestar um livro que já está emprestado, nem devolver um que já
+          está na biblioteca.
+        </li>
+        <li>
+          O botão cadastrar monta um livro novo (sempre disponível) e coloca no
+          array. Não deixe cadastrar sem título, sem autor, com título repetido
+          ou com ano maior que o ano atual.
+        </li>
+        <li>
+          O botão baixar transforma o array em texto com
+          <code>JSON.stringify</code> (indentado com 2 espaços) e entrega o
+          arquivo <code>livros.json</code> para download.
+        </li>
+        <li class="desafio">
+          <strong>Desafio:</strong> o botão importar lê o texto colado na caixa
+          e transforma em array com <code>JSON.parse</code>, substituindo os
+          livros da tela. Se o texto não for um JSON válido, o
+          <code>JSON.parse</code> dá erro: pegue com
+          <code>try</code>/<code>catch</code> e mostre um aviso em vez de
+          deixar a página quebrar. Também recuse um JSON válido que não seja um
+          array.
+        </li>
+      </ol>
+
+      <button id="carregarLivros">Carregar livros.json</button>
+
+      <br /><br />
+
+      <input type="text" id="tituloLivro" placeholder="Título do livro" />
+      <button id="emprestarLivro">Emprestar</button>
+      <button id="devolverLivro">Devolver</button>
+
+      <br /><br />
+
+      <input type="text" id="novoTitulo" placeholder="Título" />
+      <input type="text" id="novoAutor" placeholder="Autor" />
+      <input type="number" id="novoAno" placeholder="Ano" />
+      <button id="cadastrarLivro">Cadastrar</button>
+
+      <p class="saida" id="avisoLivro"></p>
+
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Ano</th>
+            <th>Situação</th>
+          </tr>
+        </thead>
+        <tbody id="corpoLivros"></tbody>
+      </table>
+
+      <p class="saida" id="resumoLivros"></p>
+
+      <button id="baixarLivros">Baixar livros.json</button>
+
+      <h3>Conteúdo atual do JSON</h3>
+      <pre id="jsonLivros"></pre>
+
+      <h3>Importar (desafio)</h3>
+      <textarea
+        id="textoImportar"
+        rows="6"
+        placeholder='[ { "titulo": "Iracema", "autor": "José de Alencar", "ano": 1865, "disponivel": true } ]'
+      ></textarea>
+      <br />
+      <button id="importarLivros">Importar</button>
+
+      <p class="dica">
+        O <code>.json()</code> do <code>fetch</code> e o
+        <code>JSON.parse</code> fazem a mesma coisa: texto vira objeto. O
+        <code>JSON.stringify</code> faz o caminho de volta. Para testar o
+        desafio, copie o conteúdo do <code>&lt;pre&gt;</code>, mude alguma
+        coisa e importe; depois apague uma vírgula ou uma aspa e veja o aviso
+        aparecer.
+      </p>
+    </section>
+
+    <section>
+      <h2>Exercício 02 - Explorando APIs (console)</h2>
+
+      <p>
+        Este exercício não mexe na página: tudo aparece no console
+        (<code>F12</code>). Para não fazer as chamadas toda vez que a página
+        abre, tudo roda dentro de <code>executarExercicio02()</code>, que só é
+        chamada pelo botão abaixo.
+      </p>
+
+      <ol>
+        <li>
+          Crie a função auxiliar <code>buscarDados(endereco)</code>: ela faz o
+          GET, mostra o status no console e devolve os dados. Se
+          <code>resposta.ok</code> for falso, mostra o JSON de erro que a API
+          mandou e devolve <code>null</code>. Se nem houver resposta, o
+          <code>catch</code> avisa e também devolve <code>null</code>. As
+          próximas etapas usam só essa função para os GETs.
+        </li>
+        <li>
+          <strong>Bancos</strong> (BrasilAPI,
+          <code>/api/banks/v1/{codigo}</code>): percorra o array
+          <code>[1, 260, 99999]</code> e mostre
+          <code>260 - NU PAGAMENTOS - IP</code> para cada banco encontrado e
+          <code>99999 - não encontrado</code> para o que não existe.
+        </li>
+        <li>
+          <strong>Feriados</strong> (BrasilAPI,
+          <code>/api/feriados/v1/2026</code>): mostre cada feriado no formato
+          <code>21/04 - Tiradentes (terça-feira)</code> e, no fim, quantos caem
+          em dia de semana e quantos no fim de semana.
+        </li>
+        <li>
+          <strong>CRUD</strong> (restful-api.dev): crie com
+          <code>POST</code> um objeto com o seu nome em <code>name</code> e, em
+          <code>data</code>, o <code>curso</code> e um array
+          <code>notas</code>. Guarde o <code>id</code> que o servidor gerou,
+          confira com um GET e mostre a média das notas
+          <strong>a partir do que o GET trouxe</strong>.
+        </li>
+        <li>
+          Continue o CRUD: troque as notas com <code>PUT</code>, troque só o
+          nome com <code>PATCH</code> e confira com um GET depois de cada um.
+          Termine com <code>DELETE</code> e um último GET, que precisa cair no
+          caso de erro da sua <code>buscarDados</code> (status 404).
+        </li>
+        <li class="desafio">
+          <strong>Desafio:</strong> três chamadas encadeadas, uma usando a
+          resposta da anterior. A partir do CEP <code>88870000</code>, descubra
+          a cidade e a sigla do estado, depois o nome do estado
+          (<code>/api/ibge/uf/v1/{sigla}</code>) e depois quantos municípios
+          ele tem (<code>/api/ibge/municipios/v1/{sigla}</code>), terminando
+          com <code>Orleans fica em Santa Catarina, que tem 295 municípios.</code>
+        </li>
+      </ol>
+
+      <button id="executarExercicio02">Executar exercício 02</button>
+
+      <p class="dica">
+        Para a data, <code>"2026-04-21".split("-")</code> devolve o array
+        <code>["2026", "04", "21"]</code>. No CRUD, cuidado com o
+        <code>PATCH</code>: na restful-api.dev, mandar um <code>data</code>
+        novo substitui o <code>data</code> inteiro, por isso o
+        <code>PATCH</code> deste exercício manda só o <code>name</code>.
+        Endereços completos:
+        <code>https://brasilapi.com.br/api/...</code> e
+        <code>https://api.restful-api.dev/objects</code>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Exercício 03 - Consulta de DDD</h2>
+
+      <p>
+        Agora com AJAX: o usuário digita um DDD e a página mostra as cidades
+        que usam aquele DDD, sem recarregar. API usada: BrasilAPI,
+        <code>/api/ddd/v1/{ddd}</code>.
+      </p>
+
+      <ol>
+        <li>
+          Antes de chamar a API, confira se o DDD tem exatamente 2 dígitos
+          numéricos. Se não tiver, avise e nem faça o <code>fetch</code>.
+        </li>
+        <li>
+          Enquanto espera a resposta, mostre <code>Buscando...</code> no aviso
+          e desabilite o botão (<code>botao.disabled = true</code>), para o
+          usuário não disparar várias buscas. Quando a resposta chegar, dando
+          certo ou não, habilite de novo.
+        </li>
+        <li>
+          Se a API responder com erro (teste <code>10</code>), mostre no aviso
+          a <code>message</code> que ela mandou e limpe o estado e a lista que
+          estavam na tela. Se nem houver resposta, avise pelo
+          <code>catch</code>.
+        </li>
+        <li>
+          Se der certo, mostre a sigla do estado e guarde as cidades no array
+          <code>cidades</code>, que é a fonte da verdade.
+          <code>mostrarCidades(lista)</code> recebe um array, cria um
+          <code>&lt;li&gt;</code> por cidade e escreve
+          <code>Mostrando 12 de 58 cidades</code>.
+        </li>
+        <li>
+          O campo de filtro usa o evento <code>input</code>: a cada letra, monta
+          um array só com as cidades que contêm o texto digitado e passa para
+          <code>mostrarCidades</code>. O filtro <strong>não</strong> chama a
+          API de novo, ele trabalha em cima do array <code>cidades</code>, e
+          não pode depender de maiúscula ou minúscula.
+        </li>
+        <li class="desafio">
+          <strong>Desafio:</strong> busque automaticamente assim que o segundo
+          dígito for digitado, sem precisar do botão, e troque a sigla pelo
+          nome completo do estado e da capital com uma segunda chamada
+          (<code>/api/ibge/uf/v1/{sigla}</code>):
+          <code>SC - Santa Catarina (capital: Florianópolis)</code>.
+        </li>
+      </ol>
+
+      <input type="text" id="dddCampo" placeholder="48" maxlength="2" />
+      <button id="buscarDdd">Buscar</button>
+
+      <p class="saida" id="avisoDdd"></p>
+      <p class="saida" id="estadoDdd"></p>
+
+      <input type="text" id="filtroCidade" placeholder="Filtrar cidades" />
+
+      <p class="saida" id="totalCidades"></p>
+      <ul id="listaCidades"></ul>
+
+      <p class="dica">
+        Strings também têm <code>includes()</code>:
+        <code>"ORLEANS".includes("LEAN")</code> é <code>true</code>. As cidades
+        chegam em maiúsculas, então passe o texto do filtro por
+        <code>toUpperCase()</code> antes de comparar. Para conferir: Orleans
+        está no DDD 48.
+      </p>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>
