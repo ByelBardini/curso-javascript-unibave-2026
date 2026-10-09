@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aula 05 - Exercícios</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Aula 05 - Exercícios</h1>
+    <p>O código vai no arquivo <code>script.js</code>.</p>
+
+    <section>
+      <h2>Exercício 01 - Consulta de DDD</h2>
+
+      <p>
+        Agora com AJAX: o usuário digita um DDD e a página mostra as cidades
+        que usam aquele DDD, sem recarregar. API usada: BrasilAPI,
+        <code>/api/ddd/v1/{ddd}</code>.
+      </p>
+
+      <ol>
+        <li>
+          Antes de chamar a API, confira se o DDD tem exatamente 2 dígitos
+          numéricos. Se não tiver, avise e nem faça o <code>fetch</code>.
+        </li>
+        <li>
+          Enquanto espera a resposta, mostre <code>Buscando...</code> no aviso
+          e desabilite o botão (<code>botao.disabled = true</code>), para o
+          usuário não disparar várias buscas. Quando a resposta chegar, dando
+          certo ou não, habilite de novo.
+        </li>
+        <li>
+          Se a API responder com erro (teste <code>10</code>), mostre no aviso
+          a <code>message</code> que ela mandou e limpe o estado e a lista que
+          estavam na tela. Se nem houver resposta, avise pelo
+          <code>catch</code>.
+        </li>
+        <li>
+          Se der certo, mostre a sigla do estado e guarde as cidades no array
+          <code>cidades</code>, que é a fonte da verdade.
+          <code>mostrarCidades(lista)</code> recebe um array, cria um
+          <code>&lt;li&gt;</code> por cidade e escreve
+          <code>Mostrando 12 de 58 cidades</code>.
+        </li>
+        <li>
+          O campo de filtro usa o evento <code>input</code>: a cada letra, monta
+          um array só com as cidades que contêm o texto digitado e passa para
+          <code>mostrarCidades</code>. O filtro <strong>não</strong> chama a
+          API de novo, ele trabalha em cima do array <code>cidades</code>, e
+          não pode depender de maiúscula ou minúscula.
+        </li>
+        <li class="desafio">
+          <strong>Desafio:</strong> busque automaticamente assim que o segundo
+          dígito for digitado, sem precisar do botão, e troque a sigla pelo
+          nome completo do estado e da capital com uma segunda chamada
+          (<code>/api/ibge/uf/v1/{sigla}</code>):
+          <code>SC - Santa Catarina (capital: Florianópolis)</code>.
+        </li>
+      </ol>
+
+      <input type="text" id="dddCampo" placeholder="48" maxlength="2" />
+      <button id="buscarDdd">Buscar</button>
+
+      <p class="saida" id="avisoDdd"></p>
+      <p class="saida" id="estadoDdd"></p>
+
+      <input type="text" id="filtroCidade" placeholder="Filtrar cidades" />
+
+      <p class="saida" id="totalCidades"></p>
+      <ul id="listaCidades"></ul>
+
+      <p class="dica">
+        Strings também têm <code>includes()</code>:
+        <code>"ORLEANS".includes("LEAN")</code> é <code>true</code>. As cidades
+        chegam em maiúsculas, então passe o texto do filtro por
+        <code>toUpperCase()</code> antes de comparar. Para conferir: Orleans
+        está no DDD 48.
+      </p>
+    </section>
+
+    <section>
+      <h2>Exercício 02 - Controle de estoque</h2>
+
+      <p>
+        Agora com a API de Produtos, a mesma da parte 02, que salva de verdade.
+        Leia a
+        <a href="https://exemplosapi.evolutivasistemas.com.br/">documentação</a>
+        antes de começar: as rotas, os campos do produto e os erros estão todos
+        lá. Os produtos ficam guardados no seu código de aluno, que vai na URL.
+      </p>
+
+      <ol>
+        <li>
+          Guarde o endereço numa constante, com o seu código no final:
+          <code>https://exemplosapi.evolutivasistemas.com.br/api/seu-codigo</code>.
+          O botão inserir exemplos faz <code>POST /exemplos</code>, que cadastra
+          alguns produtos prontos, e depois carrega a tabela de novo.
+        </li>
+        <li>
+          <code>carregarProdutos()</code> faz o GET em <code>/produtos</code>,
+          ordenado por nome e de 5 em 5:
+          <code>?ordenar=nome&amp;limite=5&amp;pagina=1</code>. Coloque também
+          <code>&amp;atraso=1000</code>, que faz a API demorar 1 segundo, e
+          mostre <code>Carregando...</code> com os botões de página desabilitados
+          enquanto espera. Os produtos da página ficam no array
+          <code>produtos</code>, que é a fonte da verdade da tabela. A tabela é
+          carregada assim que a página abre.
+        </li>
+        <li>
+          Paginação: o total de produtos (sem contar a paginação) vem no header
+          <code>X-Total-Count</code> da resposta. Use esse total para escrever
+          <code>Página 2 de 3 (12 produtos)</code> e para desabilitar o botão
+          anterior na primeira página e o próximo na última.
+        </li>
+        <li>
+          Cada linha tem os botões <code>-1</code> e <code>+1</code>, que alteram
+          o estoque com <code>PATCH</code>, mandando só
+          <code>{ "estoque": novoValor }</code>. Não deixe o estoque ficar
+          negativo (nem chame a API). A resposta do <code>PATCH</code> já traz o
+          produto atualizado: troque o objeto no array e redesenhe a tabela, sem
+          fazer outro GET.
+        </li>
+        <li>
+          O botão cadastrar faz <code>POST /produtos</code> com nome, preço e
+          estoque. Se a API responder com erro, mostre o <code>erro</code> e, com
+          <code>for...in</code>, cada campo de <code>detalhes</code> (ex.:
+          <code>preco: Campo obrigatório</code>). Teste mandando o preço sem
+          <code>Number()</code> para ver a mensagem da API. O botão excluir de
+          cada linha faz <code>DELETE</code>, que responde
+          <code>204</code> sem corpo: confira o status e não chame o
+          <code>.json()</code>.
+        </li>
+        <li class="desafio">
+          <strong>Desafio:</strong> parte 2 da API, com login. Com o usuário e a
+          senha que o professor passar, faça <code>POST /auth/login</code> e
+          guarde o <code>token</code> numa variável. A partir daí, todas as
+          chamadas usam
+          <code>https://exemplosapi.evolutivasistemas.com.br/privado</code> no
+          lugar de <code>/api/seu-codigo</code> (os caminhos
+          <code>/produtos</code> e <code>/exemplos</code> continuam iguais) e
+          enviam o header <code>Authorization</code> com
+          <code>"Bearer " + token</code>. Se alguma chamada responder
+          <code>401</code>, mostre a mensagem da API e peça o login de novo.
+        </li>
+      </ol>
+
+      <button id="inserirExemplos">Inserir exemplos</button>
+
+      <br /><br />
+
+      <input type="text" id="nomeProduto" placeholder="Nome" />
+      <input type="number" id="precoProduto" placeholder="Preço" />
+      <input type="number" id="estoqueProduto" placeholder="Estoque" />
+      <button id="cadastrarProduto">Cadastrar</button>
+
+      <p class="saida" id="avisoProdutos"></p>
+
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th>Preço</th>
+            <th>Estoque</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="corpoProdutos"></tbody>
+      </table>
+
+      <p>
+        <button id="paginaAnterior">Anterior</button>
+        <span class="saida" id="paginaProdutos"></span>
+        <button id="proximaPagina">Próxima</button>
+      </p>
+
+      <h3>Login (desafio)</h3>
+      <input type="text" id="usuarioLogin" placeholder="Usuário" />
+      <input type="password" id="senhaLogin" placeholder="Senha" />
+      <button id="fazerLogin">Entrar</button>
+
+      <p class="dica">
+        O código de aluno tem de 3 a 30 caracteres: letras minúsculas, números,
+        <code>-</code> ou <code>_</code> (ex.: <code>maria-silva</code>). Pode
+        ser o mesmo da parte 02: os produtos são os mesmos. Para os botões de
+        cada linha, monte o <code>onclick</code> com o <code>id</code> do
+        produto na string do <code>innerHTML</code>:
+        <code>"&lt;button onclick='alterarEstoque(" + produto.id + ", 1)'&gt;+1&lt;/button&gt;"</code>.
+        O header vem de <code>resposta.headers.get("X-Total-Count")</code>, que
+        devolve texto: converta com <code>Number()</code>. Travou num erro? Veja
+        a seção <em>Erros comuns</em> da documentação.
+      </p>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>
