@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exemplo 02 - AJAX: feriados do ano</title>
+  </head>
+  <body>
+    <h1>Feriados nacionais</h1>
+
+    <input type="number" id="campo-ano" value="2026" />
+    <button id="botao-buscar">Buscar</button>
+
+    <hr />
+    
+    <p id="aviso"></p>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Dia da semana</th>
+          <th>Feriado</th>
+        </tr>
+      </thead>
+      <tbody id="tabela-feriados"></tbody>
+    </table>
+
+    <p id="total"></p>
+  </body>
+  <script src="script.js"></script>
+</html>

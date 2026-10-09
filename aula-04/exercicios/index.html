@@ -35,17 +35,16 @@
         <li>
           <code>atualizarTela()</code> monta uma linha da tabela por livro (a
           coluna situação mostra <code>Disponível</code> ou
-          <code>Emprestado</code>), escreve o resumo
-          (<code>5 livros | 3 disponíveis | 2 emprestados</code>) e mostra no
-          <code>&lt;pre&gt;</code> o texto que o array viraria com
-          <code>JSON.stringify</code>.
+          <code>Emprestado</code>), escreve o resumo (<code
+            >5 livros | 3 disponíveis | 2 emprestados</code
+          >) e mostra no <code>&lt;pre&gt;</code> o texto que o array viraria
+          com <code>JSON.stringify</code>.
         </li>
         <li>
-          <code>procurarPorTitulo()</code> devolve o livro ou
-          <code>null</code>, sem mexer na tela. Use essa função nos botões
-          emprestar e devolver, que trocam o <code>disponivel</code>. Não deixe
-          emprestar um livro que já está emprestado, nem devolver um que já
-          está na biblioteca.
+          <code>procurarPorTitulo()</code> devolve o livro ou <code>null</code>,
+          sem mexer na tela. Use essa função nos botões emprestar e devolver,
+          que trocam o <code>disponivel</code>. Não deixe emprestar um livro que
+          já está emprestado, nem devolver um que já está na biblioteca.
         </li>
         <li>
           O botão cadastrar monta um livro novo (sempre disponível) e coloca no
@@ -61,10 +60,11 @@
           <strong>Desafio:</strong> o botão importar lê o texto colado na caixa
           e transforma em array com <code>JSON.parse</code>, substituindo os
           livros da tela. Se o texto não for um JSON válido, o
-          <code>JSON.parse</code> dá erro: pegue com
-          <code>try</code>/<code>catch</code> e mostre um aviso em vez de
-          deixar a página quebrar. Também recuse um JSON válido que não seja um
-          array.
+          <code>JSON.parse</code> dá erro: pegue com <code>try</code>/<code
+            >catch</code
+          >
+          e mostre um aviso em vez de deixar a página quebrar. Também recuse um
+          JSON válido que não seja um array.
         </li>
       </ol>
 
@@ -117,8 +117,8 @@
         O <code>.json()</code> do <code>fetch</code> e o
         <code>JSON.parse</code> fazem a mesma coisa: texto vira objeto. O
         <code>JSON.stringify</code> faz o caminho de volta. Para testar o
-        desafio, copie o conteúdo do <code>&lt;pre&gt;</code>, mude alguma
-        coisa e importe; depois apague uma vírgula ou uma aspa e veja o aviso
+        desafio, copie o conteúdo do <code>&lt;pre&gt;</code>, mude alguma coisa
+        e importe; depois apague uma vírgula ou uma aspa e veja o aviso
         aparecer.
       </p>
     </section>
@@ -156,12 +156,11 @@
           em dia de semana e quantos no fim de semana.
         </li>
         <li>
-          <strong>CRUD</strong> (restful-api.dev): crie com
-          <code>POST</code> um objeto com o seu nome em <code>name</code> e, em
-          <code>data</code>, o <code>curso</code> e um array
-          <code>notas</code>. Guarde o <code>id</code> que o servidor gerou,
-          confira com um GET e mostre a média das notas
-          <strong>a partir do que o GET trouxe</strong>.
+          <strong>CRUD</strong> (restful-api.dev): crie com <code>POST</code> um
+          objeto com o seu nome em <code>name</code> e, em <code>data</code>, o
+          <code>curso</code> e um array <code>notas</code>. Guarde o
+          <code>id</code> que o servidor gerou, confira com um GET e mostre a
+          média das notas <strong>a partir do que o GET trouxe</strong>.
         </li>
         <li>
           Continue o CRUD: troque as notas com <code>PUT</code>, troque só o
@@ -173,9 +172,9 @@
           <strong>Desafio:</strong> três chamadas encadeadas, uma usando a
           resposta da anterior. A partir do CEP <code>88870000</code>, descubra
           a cidade e a sigla do estado, depois o nome do estado
-          (<code>/api/ibge/uf/v1/{sigla}</code>) e depois quantos municípios
-          ele tem (<code>/api/ibge/municipios/v1/{sigla}</code>), terminando
-          com <code>Orleans fica em Santa Catarina, que tem 295 municípios.</code>
+          (<code>/api/ibge/uf/v1/{sigla}</code>) e depois quantos municípios ele
+          tem (<code>/api/ibge/municipios/v1/{sigla}</code>), terminando com
+          <code>Orleans fica em Santa Catarina, que tem 295 municípios.</code>
         </li>
       </ol>
 
@@ -184,81 +183,11 @@
       <p class="dica">
         Para a data, <code>"2026-04-21".split("-")</code> devolve o array
         <code>["2026", "04", "21"]</code>. No CRUD, cuidado com o
-        <code>PATCH</code>: na restful-api.dev, mandar um <code>data</code>
-        novo substitui o <code>data</code> inteiro, por isso o
+        <code>PATCH</code>: na restful-api.dev, mandar um <code>data</code> novo
+        substitui o <code>data</code> inteiro, por isso o
         <code>PATCH</code> deste exercício manda só o <code>name</code>.
-        Endereços completos:
-        <code>https://brasilapi.com.br/api/...</code> e
+        Endereços completos: <code>https://brasilapi.com.br/api/...</code> e
         <code>https://api.restful-api.dev/objects</code>.
-      </p>
-    </section>
-
-    <section>
-      <h2>Exercício 03 - Consulta de DDD</h2>
-
-      <p>
-        Agora com AJAX: o usuário digita um DDD e a página mostra as cidades
-        que usam aquele DDD, sem recarregar. API usada: BrasilAPI,
-        <code>/api/ddd/v1/{ddd}</code>.
-      </p>
-
-      <ol>
-        <li>
-          Antes de chamar a API, confira se o DDD tem exatamente 2 dígitos
-          numéricos. Se não tiver, avise e nem faça o <code>fetch</code>.
-        </li>
-        <li>
-          Enquanto espera a resposta, mostre <code>Buscando...</code> no aviso
-          e desabilite o botão (<code>botao.disabled = true</code>), para o
-          usuário não disparar várias buscas. Quando a resposta chegar, dando
-          certo ou não, habilite de novo.
-        </li>
-        <li>
-          Se a API responder com erro (teste <code>10</code>), mostre no aviso
-          a <code>message</code> que ela mandou e limpe o estado e a lista que
-          estavam na tela. Se nem houver resposta, avise pelo
-          <code>catch</code>.
-        </li>
-        <li>
-          Se der certo, mostre a sigla do estado e guarde as cidades no array
-          <code>cidades</code>, que é a fonte da verdade.
-          <code>mostrarCidades(lista)</code> recebe um array, cria um
-          <code>&lt;li&gt;</code> por cidade e escreve
-          <code>Mostrando 12 de 58 cidades</code>.
-        </li>
-        <li>
-          O campo de filtro usa o evento <code>input</code>: a cada letra, monta
-          um array só com as cidades que contêm o texto digitado e passa para
-          <code>mostrarCidades</code>. O filtro <strong>não</strong> chama a
-          API de novo, ele trabalha em cima do array <code>cidades</code>, e
-          não pode depender de maiúscula ou minúscula.
-        </li>
-        <li class="desafio">
-          <strong>Desafio:</strong> busque automaticamente assim que o segundo
-          dígito for digitado, sem precisar do botão, e troque a sigla pelo
-          nome completo do estado e da capital com uma segunda chamada
-          (<code>/api/ibge/uf/v1/{sigla}</code>):
-          <code>SC - Santa Catarina (capital: Florianópolis)</code>.
-        </li>
-      </ol>
-
-      <input type="text" id="dddCampo" placeholder="48" maxlength="2" />
-      <button id="buscarDdd">Buscar</button>
-
-      <p class="saida" id="avisoDdd"></p>
-      <p class="saida" id="estadoDdd"></p>
-
-      <input type="text" id="filtroCidade" placeholder="Filtrar cidades" />
-
-      <p class="saida" id="totalCidades"></p>
-      <ul id="listaCidades"></ul>
-
-      <p class="dica">
-        Strings também têm <code>includes()</code>:
-        <code>"ORLEANS".includes("LEAN")</code> é <code>true</code>. As cidades
-        chegam em maiúsculas, então passe o texto do filtro por
-        <code>toUpperCase()</code> antes de comparar. Para conferir: Orleans
-        está no DDD 48.
       </p>
     </section>
     <script src="script.js"></script>

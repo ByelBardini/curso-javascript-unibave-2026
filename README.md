@@ -4,9 +4,9 @@ Repositório com os exercícios e exemplos desenvolvidos durante o curso de Java
 
 ## Professores
 
-| Nome | GitHub |
-|------|--------|
-| Gabryel Bagio Bardini | [<img src="https://github.com/favicon.ico" width="16"/> ByelBardini](https://github.com/ByelBardini) |
+| Nome                      | GitHub                                                                                                         |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Gabryel Bagio Bardini     | [<img src="https://github.com/favicon.ico" width="16"/> ByelBardini](https://github.com/ByelBardini)           |
 | Victor Oliveira Rodrigues | [<img src="https://github.com/favicon.ico" width="16"/> victolirodrigues](https://github.com/victolirodrigues) |
 
 ## "Estrutura"
@@ -175,7 +175,7 @@ parte 01, agora guardando mais de uma informação por item. Cada exemplo tem um
   com spread) e o 04 junta tudo em um cadastro de filmes com array de objetos e busca por
   propriedade.
 
-### Aula 04 — JSON, APIs e AJAX
+### Aula 04 — JSON e APIs
 
 **Parte 01 — Lendo e alterando um arquivo JSON**
 
@@ -211,25 +211,65 @@ separado.
   diferença entre `PUT` (substitui tudo) e `PATCH` (só os campos enviados) e um GET depois
   de cada passo para conferir o que foi salvo.
 
-**Parte 03 — AJAX**
-
-- [Buscar CEP](aula-04/parte-03/index.html) — AJAX como `fetch()` + DOM: o usuário digita
-  o CEP, a BrasilAPI responde e os campos (`readonly`) de rua, bairro, cidade e estado são
-  preenchidos sem recarregar a página.
-
 **Exercícios**
 
-- [Exercícios da aula](aula-04/exercicios/index.html) — três exercícios em um arquivo só,
+- [Exercícios da aula](aula-04/exercicios/index.html) — dois exercícios em um arquivo só,
   um para cada parte, com o código a ser escrito em [script.js](aula-04/exercicios/script.js).
   Precisa ser aberto pelo _Live Server_. O 01 lê o [livros.json](aula-04/exercicios/livros.json)
   com `fetch()`, controla empréstimos e cadastro em cima do array e baixa o arquivo alterado,
   com o desafio de importar um JSON colado na página usando `JSON.parse()` e `try`/`catch`.
   O 02 fica no console: uma função auxiliar de GET com tratamento de erro, consultas na
-  BrasilAPI (bancos e feriados) e um CRUD completo na restful-api.dev. O 03 é AJAX: consulta
-  de DDD com validação antes do `fetch()`, botão desabilitado durante a busca, mensagem de
-  erro da API e um filtro de cidades pelo evento `input` que não chama a API de novo.
+  BrasilAPI (bancos e feriados) e um CRUD completo na restful-api.dev.
 
-### Aula 05 — _em breve_
+### Aula 05 — AJAX e a API de Produtos
+
+**Parte 01 — AJAX**
+
+Buscar dados no servidor e mostrar na página sem recarregar: o `fetch()` da aula 04 junto
+com o DOM da aula 02. Cada exemplo tem um `index.html` e um `script.js` separado.
+
+- [Exemplo 01 — Buscando um CEP](aula-05/parte-01/exemplo-01/index.html) — o primeiro
+  AJAX: o botão chama `buscarCep()`, o `fetch()` consulta a
+  [BrasilAPI](https://brasilapi.com.br/docs) e só os campos de rua, bairro, cidade e
+  estado mudam na página (campos `readonly`, que só o JavaScript preenche).
+- [Exemplo 02 — Feriados do ano](aula-05/parte-01/exemplo-02/index.html) — o que uma
+  página com AJAX precisa mostrar enquanto espera: `Buscando...` e o botão desabilitado
+  antes do `fetch()`, a `message` da API quando `resposta.ok` é falso (teste o ano 1800),
+  o `catch` quando nem há resposta e a tabela montada com `for...of`, com a data
+  convertida para dd/mm/aaaa usando `split("-")`.
+
+**Parte 02 — API de Produtos**
+
+Uma API feita para o curso, com um CRUD de produtos que salva de verdade. Cada aluno usa
+um código próprio na URL (`/api/{seu-codigo}/produtos`), então um não vê os dados do outro.
+
+- [Documentação da API](https://exemplosapi.evolutivasistemas.com.br/) — campos do
+  produto, rotas, exemplos com `fetch()` para cada método HTTP, filtros, busca e
+  paginação, as mensagens de erro e um console _Experimente_ para testar sem escrever
+  código. Também traz a parte 2, com login e token no header `Authorization`.
+- [Swagger](https://exemplosapi.evolutivasistemas.com.br/swagger) — todas as rotas da API
+  em uma página, prontas para executar.
+- [Meus Produtos](aula-05/parte-02/index.html) — o HTML e o
+  [CSS](aula-05/parte-02/style.css) já vêm prontos, o JavaScript é com o aluno: crie o
+  `script.js` na mesma pasta e siga o guia comentado no topo do `index.html` (ids da
+  página, o HTML de cada produto e dicas). Listar, cadastrar, editar, excluir e filtrar
+  falando com a API.
+
+**Exercícios**
+
+- [Exercícios da aula](aula-05/exercicios/index.html) — dois exercícios em um arquivo só,
+  um para cada parte, com o código a ser escrito em [script.js](aula-05/exercicios/script.js).
+  O 01 é uma consulta de DDD com AJAX na BrasilAPI: o DDD é validado antes do `fetch()`, a
+  página mostra `Buscando...`, os erros da API e as cidades, e o filtro trabalha em cima
+  do array `cidades` com o evento `input`, sem chamar a API de novo. O 02 é um controle de
+  estoque na [API de Produtos](https://exemplosapi.evolutivasistemas.com.br/): tabela
+  paginada com o total do header `X-Total-Count` e `?atraso` para ver o `Carregando...`,
+  `+1`/`-1` no estoque com `PATCH`, cadastro mostrando os `detalhes` de erro da API e
+  `DELETE` com resposta 204. O desafio usa a parte 2 da API, com login e token no header
+  `Authorization`.
+
 ### Aula 06 — _em breve_
+
 ### Aula 07 — _em breve_
+
 ### Aula 08 — _em breve_

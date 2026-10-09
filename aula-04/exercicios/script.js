@@ -16,9 +16,3 @@
 //   https://brasilapi.com.br/api/ibge/municipios/v1/{sigla}
 //   https://api.restful-api.dev/objects
 // ============================================================
-
-// ============================================================
-// EXERCÍCIO 03 — Consulta de DDD
-//
-//   https://brasilapi.com.br/api/ddd/v1/{ddd}
-// ============================================================

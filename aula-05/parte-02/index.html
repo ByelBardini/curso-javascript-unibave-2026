@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meus Produtos — Prática de APIs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topo">
+    <div class="container topo-conteudo">
+      <h1 class="logo">Meus <span>Produtos</span></h1>
+      <button id="botao-exemplos" class="btn btn-secundario" type="button">Inserir exemplos</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <p id="mensagem" class="mensagem"></p>
+
+    <section class="recurso">
+      <header class="recurso-cabecalho">
+        <h2>Produtos <span id="total-produtos" class="contador">0</span></h2>
+        <button id="botao-recarregar" class="btn btn-secundario btn-pequeno" type="button">Recarregar</button>
+      </header>
+
+      <div class="recurso-corpo">
+        <form id="form-produtos" class="formulario" autocomplete="off">
+          <h3 id="titulo-formulario" class="formulario-titulo">Novo produto</h3>
+
+          <label class="campo">
+            <span>Nome *</span>
+            <input type="text" id="campo-nome" required maxlength="120" placeholder="Ex.: Teclado mecânico">
+          </label>
+
+          <label class="campo">
+            <span>Descrição</span>
+            <textarea id="campo-descricao" rows="3" maxlength="1000" placeholder="Detalhes do produto"></textarea>
+          </label>
+
+          <div class="linha">
+            <label class="campo">
+              <span>Preço (R$) *</span>
+              <input type="number" id="campo-preco" required min="0" step="0.01" placeholder="0,00">
+            </label>
+
+            <label class="campo">
+              <span>Estoque</span>
+              <input type="number" id="campo-estoque" min="0" step="1" value="0">
+            </label>
+          </div>
+
+          <label class="campo">
+            <span>Categoria</span>
+            <input type="text" id="campo-categoria" maxlength="60" placeholder="Ex.: Periféricos">
+          </label>
+
+          <label class="check">
+            <input type="checkbox" id="campo-ativo" checked>
+            <span>Ativo</span>
+          </label>
+
+          <div class="formulario-acoes">
+            <button type="submit" class="btn btn-primario">Salvar</button>
+            <button type="button" id="botao-cancelar" class="btn btn-secundario">Cancelar</button>
+          </div>
+        </form>
+
+        <div class="listagem">
+          <form id="form-filtros" class="filtros" role="search">
+            <input type="search" id="campo-busca" placeholder="Buscar por nome, descrição ou categoria..." aria-label="Buscar produtos">
+            <select id="filtro-ativo" aria-label="Situação">
+              <option value="">Todos</option>
+              <option value="true">Ativos</option>
+              <option value="false">Inativos</option>
+            </select>
+            <select id="filtro-ordenar" aria-label="Ordenar por">
+              <option value="ordenar=nome">Nome (A–Z)</option>
+              <option value="ordenar=preco">Menor preço</option>
+              <option value="ordenar=preco&amp;ordem=desc">Maior preço</option>
+              <option value="ordenar=estoque">Menor estoque</option>
+              <option value="ordenar=id&amp;ordem=desc">Mais recentes</option>
+            </select>
+          </form>
+
+          <ul id="lista-produtos" class="lista lista-grade">
+            <li class="vazio">Nenhum produto carregado ainda.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">Prática de APIs com fetch · HTML e CSS prontos, o JavaScript é com você</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
