@@ -268,7 +268,31 @@ um código próprio na URL (`/api/{seu-codigo}/produtos`), então um não vê os
   `DELETE` com resposta 204. O desafio usa a parte 2 da API, com login e token no header
   `Authorization`.
 
-### Aula 06 — _em breve_
+### Aula 06 — Local Storage
+
+**Parte 01 — Guardando dados no navegador**
+
+O que é salvo no `localStorage` continua lá depois de recarregar ou fechar a página. Cada
+exemplo tem um `index.html` e um `script.js` separado.
+
+- [Exemplo 01 — Salvando um nome](aula-06/parte-01/exemplo-01/index.html) — os pares de
+  chave e valor com `setItem()`, `getItem()` (que devolve `null` quando a chave não existe)
+  e `removeItem()`, e onde ver o que está salvo em F12 > Application > Local Storage.
+- [Exemplo 02 — Lista de compras com array](aula-06/parte-01/exemplo-02/index.html) — o
+  `localStorage` só guarda texto, então o array vai com `JSON.stringify()` e volta com
+  `JSON.parse()`. A lista é carregada ao abrir a página, salva a cada item adicionado e
+  apagada pelo botão limpar.
+
+**Exercícios**
+
+- [Exercícios da aula](aula-06/exercicios/index.html) — dois exercícios em um arquivo só,
+  com o código a ser escrito em [script.js](aula-06/exercicios/script.js). O 01 é um
+  contador de visitas e um tema escuro que sobrevivem ao F5: `Number()` no valor lido
+  (que sempre vem como texto), `removeItem()` para zerar e `classList.toggle()` com o tema
+  salvo, com o desafio de mostrar a data da visita anterior. O 02 é uma lista de tarefas
+  com array de objetos (`{ texto, feita }`) salva com `JSON.stringify()`: concluir,
+  excluir com `splice()`, contador de concluídas e limpar com `filter()`, com o desafio de
+  filtros que também ficam salvos.
 
 ### Aula 07 — _em breve_
 
