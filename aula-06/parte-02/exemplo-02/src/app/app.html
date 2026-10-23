@@ -1,0 +1,101 @@
+<!--
+  Este arquivo faz o papel do index.html do exemplo 01, mas só com o que
+  ficava dentro do <body>. O <head> e o <body> estão no src/index.html.
+
+  Aqui o HTML não só desenha a estrutura: ele também diz o que mostrar e o
+  que fazer em cada evento, usando as variáveis e funções do app.ts. Para
+  isso o Angular acrescenta algumas sintaxes ao HTML:
+
+    {{ variavel }}              mostra o valor da variável
+    (evento)="funcao()"         chama a função quando o evento acontece
+    [propriedade]="expressao"   liga uma propriedade do elemento a uma expressão
+    [(ngModel)]="variavel"      liga um campo à variável, nos dois sentidos
+
+    @if (condicao) { ... } @else { ... }         mostra uma parte ou a outra
+    @for (item of array; track $index) { ... }   repete uma parte por item
+
+  Tudo isso se atualiza sozinho quando as variáveis mudam. Repare também
+  que nenhum elemento tem id: ninguém vai procurar por ele com
+  getElementById.
+-->
+<main>
+  <h1>Meu painel</h1>
+  <p class="subtitulo">Feito com Angular</p>
+
+  <!-- 1. Saudação -->
+  <section>
+    <h2>Saudação</h2>
+
+    <!--
+      [(ngModel)] liga o campo à variável "nome" nos dois sentidos:
+        - o usuário digita  -> a variável muda
+        - a variável muda   -> o campo mostra o novo valor
+      No exemplo 01 isso era o addEventListener("input", ...) + campoNome.value.
+    -->
+    <input type="text" [(ngModel)]="nome" placeholder="Digite seu nome" />
+
+    <!-- No exemplo 01 este if/else ficava no script.js, escrevendo com
+         textContent. Aqui ele fica no próprio HTML. -->
+    @if (nome === '') {
+      <p>Olá, visitante!</p>
+    } @else {
+      <p>Olá, {{ nome }}!</p>
+    }
+  </section>
+
+  <!-- 2. Contador -->
+  <section>
+    <h2>Contador</h2>
+
+    <!-- {{ }} mostra a variável e acompanha cada mudança dela.
+         No exemplo 01: valorContador.textContent = contador -->
+    <p class="numero">{{ contador }}</p>
+
+    <!-- (click) faz o papel do addEventListener("click", ...).
+         Lembra o onclick da aula 02, mas chamando a função do app.ts. -->
+    <div class="linha">
+      <button (click)="diminuir()">- 1</button>
+      <button (click)="aumentar()">+ 1</button>
+
+      <!-- [disabled] faz o papel do botaoZerar.disabled = contador === 0 do
+           exemplo 01, sem precisar repetir isso depois de cada clique -->
+      <button (click)="zerar()" [disabled]="contador === 0">Zerar</button>
+    </div>
+  </section>
+
+  <!-- 3. Lista de tarefas -->
+  <section>
+    <h2>Lista de tarefas</h2>
+
+    <div class="linha">
+      <input type="text" [(ngModel)]="novaTarefa" placeholder="Nova tarefa" />
+      <button (click)="adicionarTarefa()" [disabled]="novaTarefa === ''">Adicionar</button>
+    </div>
+
+    <!--
+      O @for repete o <li> para cada item do array "tarefas". É o for do
+      atualizarTarefas() do exemplo 01, sem innerHTML = "", createElement,
+      appendChild e addEventListener.
+
+      $index é a posição do item no array (o "i" do for).
+      track é obrigatório: diz ao Angular como identificar cada item, para
+      ele redesenhar só o que mudou. Aqui identificamos pela posição.
+    -->
+    <ul>
+      @for (tarefa of tarefas; track $index) {
+        <li>
+          {{ tarefa }}
+          <button (click)="removerTarefa($index)">Remover</button>
+        </li>
+      }
+    </ul>
+
+    <!-- O aviso só existe na página enquanto a lista está vazia.
+         No exemplo 01: semTarefas.style.display = "block" / "none" -->
+    @if (tarefas.length === 0) {
+      <p class="vazio">Nenhuma tarefa cadastrada.</p>
+    }
+
+    <p>Total: {{ tarefas.length }} tarefa(s)</p>
+  </section>
+</main>
