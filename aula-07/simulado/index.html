@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#243c73">
+  <title>Horizonte — Simulado de JavaScript</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topo">
+    <div class="container navegacao">
+      <a class="link-documentacao" href="https://exemplosapi.evolutivasistemas.com.br/" target="_blank" rel="noopener noreferrer">Documentação da API ↗</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="introducao" aria-labelledby="titulo-pagina">
+      <div><h1 id="titulo-pagina">AULA 07 / SIMULADO DE JAVASCRIPT.</h1></div>
+      <span class="selo">HTML + CSS prontos<br><strong>O próximo passo é seu.</strong></span>
+    </section>
+
+    <section class="estatisticas" aria-label="Indicadores da turma">
+      <article class="indicador"><span>Alunos na turma</span><strong id="total-alunos">0</strong><small>Total de registros</small></article>
+      <article class="indicador"><span>Média geral</span><strong id="media-turma">—</strong><small>As quatro notas de cada aluno</small></article>
+      <article class="indicador destaque"><span>Aprovados</span><strong id="total-aprovados">0</strong><small>Média igual ou superior a 7</small></article>
+      <article class="indicador"><span>Reprovados</span><strong id="total-reprovados">0</strong><small>Média abaixo de 7</small></article>
+    </section>
+
+    <p id="mensagem" class="mensagem" role="status" aria-live="polite"></p>
+
+    <div class="painel">
+      <section class="cartao cadastro" aria-labelledby="titulo-formulario">
+        <p class="sobretitulo">01 / REGISTRO</p><h2 id="titulo-formulario">Novo aluno</h2>
+        <div id="campos-aluno">
+          <label for="campo-nome">Nome completo</label>
+          <input id="campo-nome" name="nome" type="text" required maxlength="100" placeholder="Ex.: Marina Souza" autocomplete="off">
+          <fieldset><legend>Notas das avaliações</legend><div class="notas">
+            <div><label for="nota-1">1ª avaliação</label><input id="nota-1" name="nota1" type="number" min="0" max="10" step="0.01" required placeholder="0 a 10"></div>
+            <div><label for="nota-2">2ª avaliação</label><input id="nota-2" name="nota2" type="number" min="0" max="10" step="0.01" required placeholder="0 a 10"></div>
+            <div><label for="nota-3">3ª avaliação</label><input id="nota-3" name="nota3" type="number" min="0" max="10" step="0.01" required placeholder="0 a 10"></div>
+            <div><label for="nota-4">4ª avaliação</label><input id="nota-4" name="nota4" type="number" min="0" max="10" step="0.01" required placeholder="0 a 10"></div>
+          </div></fieldset>
+          <div class="previa"><span>Prévia da média</span><output id="previa-media" for="nota-1 nota-2 nota-3 nota-4">—</output></div>
+          <button id="botao-salvar" class="botao primario" type="button">Cadastrar aluno</button>
+          <button id="botao-cancelar" class="botao discreto" type="button">Limpar / cancelar edição</button>
+        </div>
+        <p class="nota-formulario">Cada avaliação representa 25% da média final.</p>
+      </section>
+
+      <section class="cartao listagem" aria-labelledby="titulo-turma">
+        <div class="cabecalho-lista"><div><p class="sobretitulo">02 / ACOMPANHAMENTO</p><h2 id="titulo-turma">Mapa da turma</h2></div><button id="botao-recarregar" class="botao" type="button">↻ Recarregar</button></div>
+        <div class="filtros" role="search" aria-label="Filtrar alunos">
+          <div class="busca"><label for="campo-busca">Buscar aluno</label><input id="campo-busca" type="search" placeholder="Digite um nome..."></div>
+          <div><label for="filtro-situacao">Situação</label><select id="filtro-situacao"><option value="todos">Todas</option><option value="aprovado">Aprovados</option><option value="reprovado">Reprovados</option></select></div>
+          <div><label for="filtro-ordem">Ordenar por</label><select id="filtro-ordem"><option value="nome">Nome (A–Z)</option><option value="maior">Maior média</option><option value="menor">Menor média</option></select></div>
+        </div>
+        <div class="tabela-container" role="region" aria-label="Notas dos alunos" tabindex="0">
+          <table><caption class="sr-only">Alunos, quatro avaliações, média e situação de aprovação</caption><thead><tr><th scope="col">Aluno</th><th scope="col">N1</th><th scope="col">N2</th><th scope="col">N3</th><th scope="col">N4</th><th scope="col">Média</th><th scope="col">Situação</th><th scope="col">Ações</th></tr></thead><tbody id="lista-alunos"></tbody></table>
+        </div>
+        <div id="estado-vazio" class="vazio"><span aria-hidden="true">≡</span><h3>Nenhum aluno para exibir</h3><p>Cadastre o primeiro aluno ou ajuste os filtros da turma.</p></div>
+        <div class="rodape-lista"><span id="resultado-filtro">Exibindo 0 de 0 alunos</span><span>Aprovação a partir de 7,0</span></div>
+      </section>
+    </div>
+
+    <section class="resumo" aria-label="Resumo do desempenho"><div><h2>Resumo</h2></div><div><span>Maior média</span><strong id="maior-media">—</strong></div><div><span>Menor média</span><strong id="menor-media">—</strong></div><div><span>Aprovação</span><strong id="percentual-aprovacao">—</strong></div></section>
+    <footer><span>Unibave · Simulado de JavaScript · Aula 07</span><span>Notas persistidas na API</span></footer>
+  </main>
+</body>
+</html>

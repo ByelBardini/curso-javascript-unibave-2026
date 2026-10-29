@@ -294,6 +294,13 @@ exemplo tem um `index.html` e um `script.js` separado.
   excluir com `splice()`, contador de concluídas e limpar com `filter()`, com o desafio de
   filtros que também ficam salvos.
 
-### Aula 07 — _em breve_
+### Aula 07 — Simulado de prova
+
+- [Horizonte — Painel de notas](aula-07/simulado/index.html) — HTML e CSS prontos
+  para implementar o JavaScript com a [API de Notas](https://exemplosapi.evolutivasistemas.com.br/).
+  Crie o `script.js` na pasta `aula-07/simulado` e abra a página pelo Live Server.
+  Os requisitos e critérios de avaliação estão no [README da aula](aula-07/README.md):
+  cadastro, edição, exclusão, validação de quatro notas, prévia da média, filtros
+  e indicadores da turma. O JavaScript deve ser escrito pelos alunos.
 
 ### Aula 08 — _em breve_
