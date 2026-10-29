@@ -1,6 +1,0 @@
-[
-  { "nome": "Notebook", "preco": 3500, "quantidade": 4 },
-  { "nome": "Mouse", "preco": 80, "quantidade": 20 },
-  { "nome": "Teclado", "preco": 150, "quantidade": 0 },
-  { "nome": "Monitor", "preco": 900, "quantidade": 7 }
-]
