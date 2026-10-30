@@ -1,4 +1,4 @@
-const API_URL = "https://exemplosapi.evolutivasistemas.com.br/api/willyan";
+const API_URL = "https://exemplosapi.evolutivasistemas.com.br/api/willyan-laurindo";
 
 const campoNome = document.getElementById("campo-nome");
 const nota1 = document.getElementById("nota-1");
