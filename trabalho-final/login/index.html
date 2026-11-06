@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f6b48">
+  <title>Área do lojista — MiniMarket</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<!--
+  MiniMarket — HTML e CSS prontos. Não é necessário alterar este arquivo.
+  Página da ÁREA DO LOJISTA (login, sessão e cadastro de produtos).
+  O JavaScript desta página vai no login/script.js (já ligado no fim).
+  A loja (catálogo e carrinho) é outra página: ../index.html.
+  Requisitos, ids e exemplos: README.md. Rotas da API: API.md.
+-->
+
+  <header class="topo">
+    <div class="container navegacao">
+      <span class="marca"><span class="simbolo" aria-hidden="true">M</span>MiniMarket</span>
+      <span class="etiqueta">PROVA FINAL DE JAVASCRIPT</span>
+      <nav class="menu" aria-label="Páginas">
+        <a href="../">Loja</a>
+        <a href="./" aria-current="page">Área do lojista</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="introducao" aria-labelledby="titulo-pagina">
+      <div>
+        <p class="sobretitulo">ÁREA DO LOJISTA</p>
+        <h1 id="titulo-pagina">Login e cadastro de produtos.</h1>
+        <p class="descricao">Para comprar não é preciso login. Para cadastrar produtos, entre com o usuário e a senha fornecidos pelo professor. O produto cadastrado aparece no catálogo da <a href="../">loja</a>.</p>
+      </div>
+      <span class="selo">HTML + CSS prontos<br><strong>O login/script.js é com você.</strong></span>
+    </section>
+
+    <p id="mensagem" class="mensagem" role="status" aria-live="polite"></p>
+
+    <div class="grade-lojista">
+      <section class="cartao conta" aria-labelledby="titulo-conta">
+        <h2 id="titulo-conta">Conta</h2>
+        <p id="estado-sessao" class="sessao">Visitante: você não está conectado.</p>
+
+        <form id="form-login" class="formulario" novalidate>
+          <label for="campo-usuario">Usuário</label>
+          <input id="campo-usuario" name="usuario" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+
+          <label for="campo-senha">Senha</label>
+          <input id="campo-senha" name="senha" type="password" autocomplete="current-password" required>
+
+          <button id="botao-login" class="botao primario" type="submit">Entrar</button>
+        </form>
+
+        <button id="botao-logout" class="botao" type="button" hidden>Sair</button>
+
+        <p class="nota-conta">Não existe cadastro de contas: use as credenciais fornecidas pelo professor.</p>
+      </section>
+
+      <section id="area-cadastro-produto" class="cartao cadastro" aria-labelledby="titulo-cadastro" hidden>
+        <h2 id="titulo-cadastro">Cadastrar produto</h2>
+
+        <div class="cadastro-conteudo">
+          <form id="form-produto" class="formulario" novalidate autocomplete="off">
+            <label for="produto-nome">Nome</label>
+            <input id="produto-nome" name="nome" type="text" placeholder="Ex.: Arroz 5 kg" required>
+
+            <div class="duas-colunas">
+              <div>
+                <label for="produto-preco">Preço (R$)</label>
+                <input id="produto-preco" name="preco" type="number" step="0.01" min="0.01" placeholder="Ex.: 29.90" required>
+              </div>
+              <div>
+                <label for="produto-estoque">Estoque</label>
+                <input id="produto-estoque" name="estoque" type="number" step="1" min="0" placeholder="Ex.: 8" required>
+              </div>
+            </div>
+
+            <button id="botao-cadastrar-produto" class="botao primario" type="submit">Cadastrar produto</button>
+          </form>
+
+          <div class="regras">
+            <p class="regras-titulo">Regras do cadastro</p>
+            <ul>
+              <li><strong>Nome:</strong> obrigatório, de 2 a 100 caracteres, não pode ter só espaços.</li>
+              <li><strong>Preço:</strong> obrigatório, número maior que zero.</li>
+              <li><strong>Estoque:</strong> obrigatório, número inteiro, zero ou mais.</li>
+              <li>Campo vazio não vale como zero.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <span>Unibave · Prova final de JavaScript · MiniMarket</span>
+      <span>Login com token · cadastro protegido pelo servidor</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

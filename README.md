@@ -1,14 +1,22 @@
 # Aula 08 — Prova final de JavaScript: MiniMarket
 
-Implemente uma loja fictícia com catálogo, carrinho, compra simulada e login, usando **JavaScript puro** e a API MiniMarket (contrato completo no [API.md](API.md)). O [HTML](trabalho-final/index.html) e o [CSS](trabalho-final/style.css) são fornecidos. Escreva todo o código em `trabalho-final/script.js`, já ligado na página, e abra o projeto pelo **Live Server**.
+Implemente uma loja fictícia com catálogo, carrinho, compra simulada e login, usando **JavaScript puro** e a API MiniMarket (contrato completo no [API.md](API.md)). O HTML e o [CSS](trabalho-final/style.css) são fornecidos, em **duas páginas**:
+
+| Página | Endereço no Live Server | Conteúdo | Seu JavaScript |
+| --- | --- | --- | --- |
+| [Loja](trabalho-final/index.html) | `.../trabalho-final/` | Catálogo, pesquisa, carrinho e compra (RF01 a RF05) | `trabalho-final/script.js` |
+| [Área do lojista](trabalho-final/login/index.html) | `.../trabalho-final/login/` | Login, sessão e cadastro de produtos (RF06 e RF07) | `trabalho-final/login/script.js` |
+
+As duas páginas já estão ligadas entre si pelo menu do topo e já referenciam o seu script. Abra o projeto pelo **Live Server**.
 
 Toda a lógica deve ser escrita por você. **Não altere o HTML, o CSS nem o servidor**, e não use bibliotecas nem frameworks. Tempo previsto: **2 horas**.
 
 ## Antes de começar
 
-1. Abra `trabalho-final/script.js` e troque `SEU-CODIGO` na constante `URL_API` pelo seu código de aluno. Confirme com o professor o endereço do servidor.
+1. Nos **dois** scripts (`trabalho-final/script.js` e `trabalho-final/login/script.js`), troque `SEU-CODIGO` na constante `URL_API` pelo seu código de aluno. Confirme com o professor o endereço do servidor.
 2. Guarde o **usuário** e a **senha** que o professor entregou. Eles só são necessários para cadastrar produtos.
 3. Abra `index.html` pelo Live Server. Aberta com dois cliques (`file://`), a página não consegue falar com a API.
+4. As duas páginas são do mesmo site, então enxergam o **mesmo** `localStorage`: o carrinho salvo na loja e o token salvo no login continuam lá quando você troca de página.
 
 ## Regras de acesso
 
@@ -71,7 +79,10 @@ Sugestão de formato de cada item salvo: `{ id: 1, nome: "Café torrado 500 g", 
 - **Sucesso (`201`):** mostre em `mensagem-compra` o número da compra e o **total informado pelo servidor**; esvazie o carrinho (variável e `localStorage`) e recarregue o catálogo para refletir o estoque novo.
 - **Falha** (estoque insuficiente, produto inexistente, erro de rede): mostre a mensagem da API em `mensagem-compra` e **não** limpe o carrinho.
 
-### RF06 — Login e logout
+### RF06 — Login e logout (área do lojista)
+
+Tudo do RF06 e do RF07 fica em `login/index.html` e `login/script.js`.
+
 
 - `form-login` envia `campo-usuario` e `campo-senha` em `POST /auth/login`. Sem o `preventDefault()` no `submit`, a página recarrega.
 - **Login válido:** salve o token no `localStorage`, na chave **`minimarket-token`**; mostre o usuário em `estado-sessao`; esconda `form-login`; mostre `botao-logout` e `area-cadastro-produto`; limpe o campo de senha.
@@ -81,7 +92,7 @@ Sugestão de formato de cada item salvo: `{ id: 1, nome: "Café torrado 500 g", 
 - **Logout** (`botao-logout`): chame `POST /auth/logout` (resposta `204`, sem corpo), remova o token do `localStorage` e volte ao estado de visitante, escondendo o cadastro.
 - Qualquer `401` em rota protegida (token expirado ou inválido) também remove o token e volta ao estado de visitante. **O carrinho nunca é apagado** por login, logout ou `401`.
 
-### RF07 — Cadastrar produto (somente logado)
+### RF07 — Cadastrar produto (área do lojista, somente logado)
 
 - `area-cadastro-produto` só aparece com sessão válida.
 - Antes de enviar, valide os campos de `form-produto` e mostre o problema encontrado:
@@ -91,12 +102,12 @@ Sugestão de formato de cada item salvo: `{ id: 1, nome: "Café torrado 500 g", 
   - Campo vazio **não** vale como zero.
 - Dados inválidos **não** são enviados ao servidor.
 - Envie `POST /produtos` com JSON (`nome`, `preco` e `estoque`, com números convertidos) e o token no header `Authorization`.
-- **Sucesso (`201`):** limpe os campos, mostre mensagem de sucesso e recarregue o catálogo.
+- **Sucesso (`201`):** limpe os campos e mostre mensagem de sucesso com o nome do produto. O produto passa a aparecer no catálogo da loja (ao abrir a loja ou clicar em Atualizar catálogo).
 - **`401`:** volte ao estado de visitante. **`400`:** mostre o `erro` e os `detalhes` da API, sem limpar os campos.
 
 ### RF08 — Mensagens, carregamento e erros
 
-- Use `mensagem` para carregamento, sucesso e erros do catálogo, do login/logout e do cadastro. Use `mensagem-compra` para o resultado da finalização.
+- As duas páginas têm um elemento `mensagem`. Na loja, use-o para o catálogo e o carrinho, e `mensagem-compra` para o resultado da finalização. Na área do lojista, use-o para login, logout, sessão e cadastro.
 - Mostre `Carregando...` enquanto o catálogo é buscado.
 - Em toda chamada à API, verifique `resposta.ok` (ou o status) e use `try`/`catch` para falhas de rede.
 - Desabilite o botão que disparou a requisição enquanto ela estiver em andamento e reabilite-o ao terminar, inclusive em caso de erro.
@@ -120,6 +131,8 @@ Erros vêm no formato `{ "erro": "...", "detalhes": { ... } }`. Nenhuma rota de 
 
 ## Referência da interface
 
+**Loja** (`index.html` + `script.js`)
+
 | IDs | Uso |
 | --- | --- |
 | `mensagem` | Mensagens gerais: carregamento, sucesso e erro |
@@ -135,6 +148,12 @@ Erros vêm no formato `{ "erro": "...", "detalhes": { ... } }`. Nenhuma rota de 
 | `subtotal-carrinho`, `desconto-carrinho`, `total-carrinho` | Valores da compra |
 | `botao-finalizar`, `botao-limpar-carrinho` | Finalizar compra e esvaziar carrinho |
 | `mensagem-compra` | Resultado da finalização (número da compra ou erro) |
+
+**Área do lojista** (`login/index.html` + `login/script.js`)
+
+| IDs | Uso |
+| --- | --- |
+| `mensagem` | Mensagens de login, logout, sessão e cadastro |
 | `estado-sessao` | Texto de visitante ou do usuário conectado |
 | `form-login`, `campo-usuario`, `campo-senha`, `botao-login` | Formulário de login (`botao-login` é `submit`) |
 | `botao-logout` | Sair; começa escondido |
@@ -200,8 +219,8 @@ Produto com estoque zero: classe extra `sem-estoque` e botão desabilitado.
 | Carrinho e persistência | RF03 | 20 | Adicionar sem duplicar linha, +1/-1, remover, limite de estoque, esvaziar, carrinho permanece após F5 |
 | Subtotal, desconto e total | RF04 | 15 | Cálculos corretos, desconto de 10% a partir de R$ 200,00, carrinho vazio zerado |
 | Finalização da compra | RF05 | 15 | `POST` sem login só com ids e quantidades, número e total do servidor, carrinho limpo só no sucesso, estoque atualizado |
-| Login e logout | RF06 | 15 | Token salvo, sessão restaurada após F5 com `/auth/eu`, botão Sair, `401` tratado sem apagar o carrinho |
-| Cadastro autenticado | RF07 | 10 | Validações antes do envio, `POST` com token, catálogo atualizado |
+| Login e logout | RF06 | 15 | Token salvo, sessão restaurada após F5 com `/auth/eu` (inclusive ao voltar da loja), botão Sair, `401` tratado sem apagar o carrinho |
+| Cadastro autenticado | RF07 | 10 | Validações antes do envio, `POST` com token, produto aparece no catálogo da loja |
 | Mensagens e tratamento de erros | RF08 | 10 | Carregamento, erros da API e de rede, botões bloqueados durante requisições |
 
 Na correção serão testados, entre outros: produto sem estoque, o mesmo produto adicionado duas vezes, +1 acima do estoque, subtotal de R$ 199,99 e de exatamente R$ 200,00, F5 com carrinho e com sessão, compra sem login, estoque esgotado por outra compra antes de finalizar, senha errada, cadastro com nome só de espaços, preço zero, estoque negativo e estoque decimal, logout, token inválido e servidor fora do ar. Dados fixos no código não substituem a integração com a API.
