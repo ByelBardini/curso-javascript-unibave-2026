@@ -1,315 +1,211 @@
-# Curso JavaScript - Unibave 2026
+# Aula 08 — Prova final de JavaScript: MiniMarket
 
-Repositório com os exercícios e exemplos desenvolvidos durante o curso de JavaScript da Unibave.
+Implemente uma loja fictícia com catálogo, carrinho, compra simulada e login, usando **JavaScript puro** e a API MiniMarket (contrato completo no [API.md](API.md)). O [HTML](trabalho-final/index.html) e o [CSS](trabalho-final/style.css) são fornecidos. Escreva todo o código em `trabalho-final/script.js`, já ligado na página, e abra o projeto pelo **Live Server**.
 
-## Professores
+Toda a lógica deve ser escrita por você. **Não altere o HTML, o CSS nem o servidor**, e não use bibliotecas nem frameworks. Tempo previsto: **2 horas**.
 
-| Nome                      | GitHub                                                                                                         |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| Gabryel Bagio Bardini     | [<img src="https://github.com/favicon.ico" width="16"/> ByelBardini](https://github.com/ByelBardini)           |
-| Victor Oliveira Rodrigues | [<img src="https://github.com/favicon.ico" width="16"/> victolirodrigues](https://github.com/victolirodrigues) |
+## Antes de começar
 
-## Estrutura
+1. Abra `trabalho-final/script.js` e troque `SEU-CODIGO` na constante `URL_API` pelo seu código de aluno. Confirme com o professor o endereço do servidor.
+2. Guarde o **usuário** e a **senha** que o professor entregou. Eles só são necessários para cadastrar produtos.
+3. Abra `index.html` pelo Live Server. Aberta com dois cliques (`file://`), a página não consegue falar com a API.
 
-O repositório é organizado por aula, uma pasta por encontro:
+## Regras de acesso
 
+| Ação | Visitante (sem login) | Usuário logado |
+| --- | :---: | :---: |
+| Ver catálogo, preços e estoque; pesquisar | Sim | Sim |
+| Adicionar, alterar quantidade e remover do carrinho | Sim | Sim |
+| Finalizar compra simulada | Sim | Sim |
+| Cadastrar produto no catálogo | **Não** | **Sim** |
+| Sair da conta | — | Sim |
+
+## Requisitos funcionais
+
+### RF01 — Carregar e apresentar o catálogo
+
+- Ao abrir a página, busque os produtos com `GET /produtos` e exiba-os em `lista-produtos`.
+- Cada produto mostra **nome, preço e estoque** e o botão **Adicionar ao carrinho**.
+- Produto com estoque `0` deve aparecer como indisponível e **não** pode ser adicionado.
+- `total-produtos` mostra a quantidade de produtos do catálogo, contada por você a partir do array recebido. A pesquisa não altera esse número.
+- `botao-recarregar` consulta a API de novo.
+- Mostre `estado-catalogo-vazio` quando não houver produtos para exibir e esconda-o quando houver.
+
+### RF02 — Pesquisar produtos
+
+- `campo-busca` filtra por **parte do nome**, sem diferenciar maiúsculas de minúsculas (`can` encontra "Caneca de cerâmica" e "Kit canetas coloridas").
+- A pesquisa reage à digitação e trabalha sobre o array já carregado, **sem** chamar a API a cada letra.
+- A pesquisa **não** pode modificar o array original de produtos.
+- Sem correspondência, mostre `estado-catalogo-vazio`.
+
+### RF03 — Manter o carrinho (sem login)
+
+- Adicionar um produto que **já está** no carrinho aumenta a quantidade dele; não cria uma segunda linha.
+- Cada linha de `lista-carrinho` mostra nome, preço unitário, quantidade, subtotal do item (`preço × quantidade`) e os botões **-1**, **+1** e **Remover**.
+- A quantidade não pode passar do estoque do produto no catálogo. Nesse caso, avise e não aumente.
+- **Regra do -1:** com quantidade 1, o **-1** remove o item do carrinho.
+- `quantidade-carrinho` mostra a **soma das quantidades** de todos os itens (não o número de linhas).
+- `botao-limpar-carrinho` esvazia o carrinho.
+- Mostre `estado-carrinho-vazio` com o carrinho vazio e esconda-o quando houver itens.
+- O carrinho é salvo no `localStorage`, na chave **`minimarket-carrinho`**, a cada alteração, e recuperado ao abrir a página. O carrinho pertence ao navegador: login e logout **não** o apagam.
+
+Sugestão de formato de cada item salvo: `{ id: 1, nome: "Café torrado 500 g", preco: 22.9, quantidade: 2 }`.
+
+### RF04 — Calcular os valores
+
+| Elemento | Regra |
+| --- | --- |
+| `subtotal-carrinho` | Soma de `preço × quantidade` de todos os itens |
+| `desconto-carrinho` | 10% do subtotal se o subtotal for **maior ou igual a R$ 200,00**; abaixo disso, zero |
+| `total-carrinho` | Subtotal − desconto |
+
+- O limite de R$ 200,00 é verificado no subtotal **antes** do desconto. R$ 199,99 não tem desconto; R$ 200,00 tem desconto de R$ 20,00 e total de R$ 180,00.
+- Recalcule tudo a cada inclusão, +1, -1, remoção ou limpeza, e também ao abrir a página com um carrinho salvo.
+- Mostre os valores com duas casas decimais, no formato `R$ 22.90` (use `toFixed(2)`). Carrinho vazio: `R$ 0.00` nos três. Nunca mostre `NaN` nem valores negativos.
+
+### RF05 — Finalizar a compra (sem login)
+
+- `botao-finalizar` funciona para visitantes. Com o carrinho vazio, avise e não chame a API.
+- Envie `POST /compras` **apenas com o id e a quantidade** de cada item. Não envie preço, desconto nem total.
+- Durante o envio, desabilite `botao-finalizar` para evitar compra duplicada; reabilite ao terminar, mesmo com erro.
+- **Sucesso (`201`):** mostre em `mensagem-compra` o número da compra e o **total informado pelo servidor**; esvazie o carrinho (variável e `localStorage`) e recarregue o catálogo para refletir o estoque novo.
+- **Falha** (estoque insuficiente, produto inexistente, erro de rede): mostre a mensagem da API em `mensagem-compra` e **não** limpe o carrinho.
+
+### RF06 — Login e logout
+
+- `form-login` envia `campo-usuario` e `campo-senha` em `POST /auth/login`. Sem o `preventDefault()` no `submit`, a página recarrega.
+- **Login válido:** salve o token no `localStorage`, na chave **`minimarket-token`**; mostre o usuário em `estado-sessao`; esconda `form-login`; mostre `botao-logout` e `area-cadastro-produto`; limpe o campo de senha.
+- **Login inválido:** mostre a mensagem de erro e continue como visitante.
+- **Ao abrir a página** com um token salvo, confirme-o com `GET /auth/eu`. Se valer, entre no estado logado; se responder `401`, remova o token e fique como visitante.
+- Envie o header `Authorization: Bearer TOKEN` **somente** nas rotas que exigem login (`/auth/eu`, `/auth/logout` e `POST /produtos`).
+- **Logout** (`botao-logout`): chame `POST /auth/logout` (resposta `204`, sem corpo), remova o token do `localStorage` e volte ao estado de visitante, escondendo o cadastro.
+- Qualquer `401` em rota protegida (token expirado ou inválido) também remove o token e volta ao estado de visitante. **O carrinho nunca é apagado** por login, logout ou `401`.
+
+### RF07 — Cadastrar produto (somente logado)
+
+- `area-cadastro-produto` só aparece com sessão válida.
+- Antes de enviar, valide os campos de `form-produto` e mostre o problema encontrado:
+  - `produto-nome`: obrigatório, sem contar os espaços das pontas; de 2 a 100 caracteres; só espaços é inválido.
+  - `produto-preco`: obrigatório, numérico, maior que zero.
+  - `produto-estoque`: obrigatório, número **inteiro**, maior ou igual a zero (zero é permitido).
+  - Campo vazio **não** vale como zero.
+- Dados inválidos **não** são enviados ao servidor.
+- Envie `POST /produtos` com JSON (`nome`, `preco` e `estoque`, com números convertidos) e o token no header `Authorization`.
+- **Sucesso (`201`):** limpe os campos, mostre mensagem de sucesso e recarregue o catálogo.
+- **`401`:** volte ao estado de visitante. **`400`:** mostre o `erro` e os `detalhes` da API, sem limpar os campos.
+
+### RF08 — Mensagens, carregamento e erros
+
+- Use `mensagem` para carregamento, sucesso e erros do catálogo, do login/logout e do cadastro. Use `mensagem-compra` para o resultado da finalização.
+- Mostre `Carregando...` enquanto o catálogo é buscado.
+- Em toda chamada à API, verifique `resposta.ok` (ou o status) e use `try`/`catch` para falhas de rede.
+- Desabilite o botão que disparou a requisição enquanto ela estiver em andamento e reabilite-o ao terminar, inclusive em caso de erro.
+- Em operação malsucedida, não informe sucesso e não apague o que foi digitado.
+- Depois de uma compra, catálogo, carrinho, contadores e totais devem ficar coerentes entre si.
+
+## Integração com a API
+
+Base: `ENDERECO-DO-SERVIDOR/api/SEU-CODIGO`. Formatos, exemplos e erros estão no [API.md](API.md).
+
+| Método | Caminho após a base | Login? | Finalidade |
+| --- | --- | :---: | --- |
+| GET | `/produtos` | Não | Array de produtos `{ id, nome, preco, estoque }` |
+| POST | `/produtos` | **Sim** | Cadastrar `{ nome, preco, estoque }`; retorna 201 |
+| POST | `/compras` | Não | Finalizar `{ itens: [ { produtoId, quantidade } ] }`; retorna 201 com `id`, `subtotal`, `desconto` e `total` |
+| POST | `/auth/login` | Não | Enviar `{ usuario, senha }`; retorna `{ token, usuario, ... }` |
+| GET | `/auth/eu` | **Sim** | Confirmar o token salvo |
+| POST | `/auth/logout` | **Sim** | Encerrar a sessão; retorna 204 sem corpo |
+
+Erros vêm no formato `{ "erro": "...", "detalhes": { ... } }`. Nenhuma rota de carrinho existe: o carrinho é todo seu.
+
+## Referência da interface
+
+| IDs | Uso |
+| --- | --- |
+| `mensagem` | Mensagens gerais: carregamento, sucesso e erro |
+| `lista-produtos` | `<ul>` que recebe os cartões de produto |
+| `campo-busca` | Pesquisa pelo nome |
+| `botao-recarregar` | Nova consulta ao catálogo |
+| `total-produtos` | Quantidade de produtos do catálogo |
+| `estado-catalogo-vazio` | Aviso de catálogo vazio ou pesquisa sem resultado |
+| `filtro-estoque` | Checkbox do desafio opcional |
+| `lista-carrinho` | `<ul>` que recebe os itens do carrinho |
+| `quantidade-carrinho` | Soma das unidades no carrinho |
+| `estado-carrinho-vazio` | Aviso de carrinho vazio |
+| `subtotal-carrinho`, `desconto-carrinho`, `total-carrinho` | Valores da compra |
+| `botao-finalizar`, `botao-limpar-carrinho` | Finalizar compra e esvaziar carrinho |
+| `mensagem-compra` | Resultado da finalização (número da compra ou erro) |
+| `estado-sessao` | Texto de visitante ou do usuário conectado |
+| `form-login`, `campo-usuario`, `campo-senha`, `botao-login` | Formulário de login (`botao-login` é `submit`) |
+| `botao-logout` | Sair; começa escondido |
+| `area-cadastro-produto` | Área de cadastro; começa escondida |
+| `form-produto`, `produto-nome`, `produto-preco`, `produto-estoque`, `botao-cadastrar-produto` | Formulário de cadastro (`botao-cadastrar-produto` é `submit`) |
+
+Os formulários têm `novalidate`: o navegador não valida nada sozinho, a validação é sua.
+
+### Estrutura visual de um produto
+
+Exemplo de HTML de um item de `lista-produtos`, sem lógica pronta:
+
+```html
+<li class="produto">
+  <h3 class="produto-nome">Café torrado 500 g</h3>
+  <p class="produto-preco">R$ 22.90</p>
+  <p class="produto-estoque">Estoque: 12</p>
+  <button type="button" class="botao primario">Adicionar ao carrinho</button>
+</li>
 ```
-aula-01/  aula-02/  aula-03/  aula-04/
-aula-05/  aula-06/  aula-07/  aula-08/
+
+Produto com estoque zero: classe extra `sem-estoque` e botão desabilitado.
+
+```html
+<li class="produto sem-estoque">
+  <h3 class="produto-nome">Mochila escolar</h3>
+  <p class="produto-preco">R$ 149.90</p>
+  <p class="produto-estoque">Sem estoque</p>
+  <button type="button" class="botao primario" disabled>Indisponível</button>
+</li>
 ```
 
-## Conteúdo
+### Estrutura visual de um item do carrinho
 
-### Aula 01 — Introdução
+```html
+<li class="item-carrinho">
+  <div class="item-dados">
+    <strong class="item-nome">Café torrado 500 g</strong>
+    <span class="item-preco">R$ 22.90 cada</span>
+  </div>
+  <div class="item-controles">
+    <button type="button" class="botao-quantidade">-1</button>
+    <span class="item-quantidade">2</span>
+    <button type="button" class="botao-quantidade">+1</button>
+  </div>
+  <span class="item-subtotal">R$ 45.80</span>
+  <button type="button" class="botao-remover">Remover</button>
+</li>
+```
 
-**Parte 01 — HTML**
+### Observações sobre a interface
 
-Primeiro contato com HTML puro, sem CSS e sem JavaScript.
+- Os botões de cada produto e de cada item precisam saber a qual `id` se referem. Você pode usar o `onclick` montado na string do `innerHTML`, como na aula 05, ou `createElement` com `addEventListener`, como na aula 06. Prefira `textContent` para o nome do produto.
+- Para esconder ou mostrar `estado-catalogo-vazio`, `estado-carrinho-vazio`, `form-login`, `botao-logout` e `area-cadastro-produto`, use a propriedade `hidden`: `elemento.hidden = true` esconde e `elemento.hidden = false` mostra.
+- As mensagens mudam de cor pela classe: `elemento.className = "mensagem sucesso"`, `"mensagem erro"`, `"mensagem carregando"` ou só `"mensagem"`. Sem texto, a mensagem some sozinha.
+- Opcional: `estado-sessao` com a classe `"sessao logado"` fica verde.
 
-- [Página base em HTML](aula-01/parte-01/index.html) — estrutura de um documento HTML
-  (`<!doctype>`, `<head>` com charset e viewport, `<body>`), tags semânticas
-  (`header`, `main`, `section`, `footer`) e as tags mais comuns: títulos (`h1` a `h6`),
-  parágrafos (`p`), listas (`ul`/`li`), links (`a`) e imagens (`img`).
-- [Arquivo para exercício](aula-01/parte-01/exercicio.html) — esqueleto vazio para o
-  aluno montar a própria página.
-- [HTML Tutorial — W3Schools](https://www.w3schools.com/html/) — material de apoio para
-  consultar as tags e testar exemplos fora da aula.
+## Critérios de avaliação (100 pontos)
 
-**Parte 02 — Git e GitHub**
+| Critério | Requisitos | Pontos | Evidência |
+| --- | --- | ---: | --- |
+| Catálogo e busca | RF01, RF02 | 15 | Lista vem da API, recarregar funciona, busca por parte do nome sem diferenciar maiúsculas, produto sem estoque bloqueado |
+| Carrinho e persistência | RF03 | 20 | Adicionar sem duplicar linha, +1/-1, remover, limite de estoque, esvaziar, carrinho permanece após F5 |
+| Subtotal, desconto e total | RF04 | 15 | Cálculos corretos, desconto de 10% a partir de R$ 200,00, carrinho vazio zerado |
+| Finalização da compra | RF05 | 15 | `POST` sem login só com ids e quantidades, número e total do servidor, carrinho limpo só no sucesso, estoque atualizado |
+| Login e logout | RF06 | 15 | Token salvo, sessão restaurada após F5 com `/auth/eu`, botão Sair, `401` tratado sem apagar o carrinho |
+| Cadastro autenticado | RF07 | 10 | Validações antes do envio, `POST` com token, catálogo atualizado |
+| Mensagens e tratamento de erros | RF08 | 10 | Carregamento, erros da API e de rede, botões bloqueados durante requisições |
 
-Como instalar o Git, baixar o repositório e enviar os exercícios.
+Na correção serão testados, entre outros: produto sem estoque, o mesmo produto adicionado duas vezes, +1 acima do estoque, subtotal de R$ 199,99 e de exatamente R$ 200,00, F5 com carrinho e com sessão, compra sem login, estoque esgotado por outra compra antes de finalizar, senha errada, cadastro com nome só de espaços, preço zero, estoque negativo e estoque decimal, logout, token inválido e servidor fora do ar. Dados fixos no código não substituem a integração com a API.
 
-- [Clonando o repositório](aula-01/parte-02/01-clonando-o-repositorio.md) — instalação do
-  Git pelo `winget`, `git clone`, `git fetch` e criação da branch pessoal
-  (`nome-sobrenome`) com `git checkout -b` e o primeiro `git push -u`.
-- [Enviando alterações para o GitHub](aula-01/parte-02/02-enviando-para-o-github.md) —
-  o ciclo do dia a dia: `git branch`, `git checkout`, `git add .`, `git status`,
-  `git commit -m` e `git push`.
+## Desafio opcional
 
-### Aula 02 — JavaScript e DOM
-
-**Parte 01 — JavaScript no navegador**
-
-Primeiro contato com a linguagem, sem nenhuma manipulação de página: tudo roda no
-`<script>` e é observado pelo `console.log`. Cada exemplo tem só um `index.html`.
-
-- [Exemplo 01 — Olá, mundo](aula-02/parte-01/exemplo-01/index.html) — primeiro script da
-  aula, um único `console.log` para ver a saída no console do navegador.
-- [Exemplo 02 — Variáveis e tipos de dados](aula-02/parte-01/exemplo-02/index.html) —
-  diferença entre `const` e `let`, e os tipos primitivos (`string`, `number`, `boolean`,
-  `undefined`, `null`) verificados com `typeof`.
-- [Exemplo 03 — Operadores](aula-02/parte-01/exemplo-03/index.html) — operadores
-  aritméticos, de atribuição composta (`+= -= *=`...), lógicos (`&& || !`) e de
-  incremento/decremento (`++`/`--`).
-- [Exemplo 04 — Concatenação e template strings](aula-02/parte-01/exemplo-04/index.html) —
-  concatenar com `+` versus usar template strings com crase e `${}`.
-- [Exemplo 05 — Conversão de tipos com Number()](aula-02/parte-01/exemplo-05/index.html) —
-  o erro clássico de somar strings numéricas (`"10" + "10"`) e a correção com `Number()`.
-- [Exemplo 06 — Funções com e sem parâmetro](aula-02/parte-01/exemplo-06/index.html) —
-  compara uma função que depende de uma variável externa com uma que recebe parâmetro.
-- [Exemplo 07 — Retorno de função](aula-02/parte-01/exemplo-07/index.html) — o `return`
-  para devolver um valor utilizável fora da função.
-
-**Parte 02 — Manipulação da página**
-
-Primeiro contato com o DOM: ler valores digitados pelo usuário e escrever resultados na
-página, disparando as funções com `onclick` no próprio HTML. Cada exemplo tem só um
-`index.html`, com o script embutido no fim do arquivo.
-
-- [Exemplo 01 — Primeira função ligada a um botão](aula-02/parte-02/exemplo-01/index.html) —
-  um botão chamando uma função que faz `console.log`, ainda sem ler nada da página.
-- [Exemplo 02 — Saudação com cálculo de idade](aula-02/parte-02/exemplo-02/index.html) —
-  `document.getElementById(...).value` para ler nome e ano de nascimento, `Number()` para
-  converter e `textContent` para escrever o resultado no console.
-- [Exemplo 03 — Calculadora](aula-02/parte-02/exemplo-03/index.html) — quatro funções
-  (somar, subtrair, multiplicar, dividir), cada uma ligada a um botão, lendo dois campos
-  numéricos e escrevendo o resultado no console.
-
-**Parte 03 — DOM: eventos**
-
-Aprofunda o DOM da parte 02, agora com `script.js` separado do HTML. Troca o `onclick`
-por `addEventListener` e fecha com um catálogo de outros eventos do navegador.
-
-- [Exemplo 01 — Exibir nome no console](aula-02/parte-03/exemplo-01/index.html) — dois
-  botões lendo o mesmo campo com `document.getElementById(...).value` e imprimindo com
-  `console.log`, primeiro exemplo já com `script.js` externo.
-- [Exemplo 02 — Alterando a página](aula-02/parte-03/exemplo-02/index.html) — quatro formas
-  de alterar o DOM: `textContent`, `style`, `innerHTML` e `style.display` para
-  esconder/mostrar um elemento.
-- [Exemplo 03 — Eventos](aula-02/parte-03/exemplo-03/index.html) — `addEventListener` no
-  lugar do `onclick` no HTML, com os eventos `click`, `input` e `change`.
-- [Exemplo 04 — Outros eventos](aula-02/parte-03/exemplo-04/index.html) — catálogo mais
-  amplo de eventos do DOM: `dblclick`, `keydown`, `focus`/`blur`, `mouseover`/`mouseout`,
-  `mousemove`, `submit` (com `preventDefault()`) e `contextmenu`.
-
-**Parte 04 — Funções e lógica**
-
-Onde as partes anteriores se encontram: funções que chamam outras funções, com a lógica
-separada do que mexe na tela.
-
-- [Validação de cadastro](aula-02/parte-04/index.html) — uma função de validação para cada
-  campo, todas devolvendo a mensagem de erro com `return` e nenhuma delas tocando no HTML.
-  A função principal só organiza a ordem: ler, validar, mostrar e decidir.
-
-**Exercícios**
-
-- [Exercícios da aula](aula-02/exercicios/index.html) — cinco exercícios em um arquivo só,
-  com o código a ser escrito em [script.js](aula-02/exercicios/script.js). O 01 fica só no
-  `console.log` (variáveis, tipos e template string), o 02 faz o ciclo completo de ler um
-  campo, converter com `Number()` e escrever com `textContent`, o 03 e o 04 praticam DOM e
-  o 05 cobra a separação entre as funções de cálculo e a função que escreve na página.
-
-### Aula 03 — Arrays, objetos e JSON
-
-**Parte 01 — Arrays**
-
-Do primeiro `console.log` de um array até uma lista interativa na página. Cada exemplo tem
-um `index.html` e um `script.js` separado.
-
-- [Exemplo 01 — Arrays no console](aula-03/parte-01/exemplo-01/index.html) — o que é um
-  array, acesso por índice (começando em 0), `length`, o último item com `length - 1`,
-  `typeof` devolvendo `object` e `Array.isArray()` para confirmar.
-- [Exemplo 02 — Percorrendo e escrevendo na página](aula-03/parte-01/exemplo-02/index.html) —
-  três formas de percorrer e exibir: `for` com índice montando `<li>` com
-  `createElement`/`appendChild`, `for...of` no console e uma string de HTML jogada de uma
-  vez no `innerHTML`.
-- [Exemplo 03 — Métodos de array](aula-03/parte-01/exemplo-03/index.html) — `push()`,
-  `pop()`, `shift()`, `unshift()`, `splice()` (removendo, trocando e inserindo) e
-  `includes()`, com o valor de retorno de cada um e a observação de que um array `const`
-  tem o conteúdo alterado do mesmo jeito.
-- [Exemplo 04 — Lista de compras interativa](aula-03/parte-01/exemplo-04/index.html) —
-  os métodos da aula ligados a botões: o array é a fonte da verdade e uma função
-  `atualizarTela()` redesenha a lista a cada mudança, com `includes()` barrando itens
-  repetidos e validação de posição antes do `splice()`.
-
-**Parte 02 — Objetos**
-
-Do objeto solto no console até um estoque interativo. Os exemplos partem dos mesmos da
-parte 01, agora guardando mais de uma informação por item. Cada exemplo tem um
-`index.html` e um `script.js` separado.
-
-- [Exemplo 01 — Objetos no console](aula-03/parte-02/exemplo-01/index.html) — o que é um
-  objeto, acesso por ponto e por colchetes, propriedade inexistente devolvendo `undefined`,
-  alterar/criar/`delete` de propriedades, `typeof` devolvendo `object` igual ao array e
-  objetos com array e outro objeto dentro.
-- [Exemplo 02 — Array de objetos na página](aula-03/parte-02/exemplo-02/index.html) — a
-  lista de alunos da parte 01 com nome, idade e nota em cada item: `for` com índice
-  montando `<li>`, `for...of` calculando a média da turma e uma tabela montada com
-  `innerHTML`, com a situação calculada a partir da nota.
-- [Exemplo 03 — Percorrer, copiar e buscar](aula-03/parte-02/exemplo-03/index.html) —
-  `Object.keys()`, `Object.values()`, `Object.entries()`, o laço `for...in`, a diferença
-  entre o `=` (que dá outro nome ao mesmo objeto) e a cópia com spread `{ ... }`, e busca,
-  filtro e soma dentro de um array de objetos.
-- [Exemplo 04 — Estoque de produtos](aula-03/parte-02/exemplo-04/index.html) — a lista
-  interativa da parte 01 virando um cadastro: o array de objetos é a fonte da verdade,
-  `atualizarTela()` redesenha a tabela a cada mudança e a busca passa a ser por uma
-  propriedade (`procurarPorNome()`) no lugar do `includes()`.
-
-**Exercícios**
-
-- [Exercícios da aula](aula-03/exercicios/index.html) — quatro exercícios em um arquivo só,
-  com o código a ser escrito em [script.js](aula-03/exercicios/script.js). Os dois
-  primeiros são de array: o 01 fica só no `console.log` (índices, `length`, média com
-  `for`) e o 02 monta uma lista de tarefas com o array como fonte da verdade. Os dois
-  seguintes são de objeto: o 03 volta ao console (ponto vs. colchetes, `for...in`, cópia
-  com spread) e o 04 junta tudo em um cadastro de filmes com array de objetos e busca por
-  propriedade.
-
-### Aula 04 — JSON e APIs
-
-**Parte 01 — Lendo e alterando um arquivo JSON**
-
-O estoque da aula 03 agora vem de um arquivo. Precisa ser aberta pelo _Live Server_ do
-VS Code: abrindo com dois cliques (`file://`) o navegador bloqueia a leitura do JSON.
-
-- [Estoque vindo de um arquivo JSON](aula-04/parte-01/index.html) — as regras do formato
-  JSON (chaves e textos com aspas duplas, sem vírgula sobrando, sem comentários), leitura do
-  [produtos.json](aula-04/parte-01/produtos.json) com `fetch()` + `async`/`await` e
-  `.json()`, alteração do array na memória com o mesmo `procurarPorNome()` da aula 03 e o
-  caminho de volta com `JSON.stringify()`, gerando um download com `Blob` (o navegador não
-  deixa o JavaScript gravar por cima do arquivo). Fecha com `JSON.parse()` no console.
-
-**Parte 02 — Consumindo APIs**
-
-O mesmo `fetch()` da parte 01, agora apontando para um servidor. Os exemplos não mexem na
-página: tudo é observado no console. Cada exemplo tem um `index.html` e um `script.js`
-separado.
-
-- [Exemplo 01 — Buscando dados de uma API (GET)](aula-04/parte-02/exemplo-01/index.html) —
-  o que é uma API e o GET como padrão do `fetch()`, usando a
-  [BrasilAPI](https://brasilapi.com.br/docs): CEP, cidades de um DDD, feriados nacionais
-  percorridos com `for...of`, estado e municípios do IBGE (objeto dentro de objeto), banco
-  pelo código e empresa pelo CNPJ.
-- [Exemplo 02 — Tratando erros e trabalhando com as respostas](aula-04/parte-02/exemplo-02/index.html) —
-  `resposta.ok` e `resposta.status` (200, 400, 404, 500), `try`/`catch` para quando não há
-  resposta, uma chamada usando o resultado da anterior (CEP → estado), filtros e contadores
-  em cima dos dados recebidos e conversão de dólar com a cotação do dia.
-- [Exemplo 03 — CRUD completo com uma API que salva de verdade](aula-04/parte-02/exemplo-03/index.html) —
-  os métodos HTTP (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`) com a
-  [restful-api.dev](https://restful-api.dev): o segundo parâmetro do `fetch()` com
-  `method`, `headers` e `body` com `JSON.stringify()`, o `id` gerado pelo servidor, a
-  diferença entre `PUT` (substitui tudo) e `PATCH` (só os campos enviados) e um GET depois
-  de cada passo para conferir o que foi salvo.
-
-**Exercícios**
-
-- [Exercícios da aula](aula-04/exercicios/index.html) — dois exercícios em um arquivo só,
-  um para cada parte, com o código a ser escrito em [script.js](aula-04/exercicios/script.js).
-  Precisa ser aberto pelo _Live Server_. O 01 lê o [livros.json](aula-04/exercicios/livros.json)
-  com `fetch()`, controla empréstimos e cadastro em cima do array e baixa o arquivo alterado,
-  com o desafio de importar um JSON colado na página usando `JSON.parse()` e `try`/`catch`.
-  O 02 fica no console: uma função auxiliar de GET com tratamento de erro, consultas na
-  BrasilAPI (bancos e feriados) e um CRUD completo na restful-api.dev.
-
-### Aula 05 — AJAX e a API de Produtos
-
-**Parte 01 — AJAX**
-
-Buscar dados no servidor e mostrar na página sem recarregar: o `fetch()` da aula 04 junto
-com o DOM da aula 02. Cada exemplo tem um `index.html` e um `script.js` separado.
-
-- [Exemplo 01 — Buscando um CEP](aula-05/parte-01/exemplo-01/index.html) — o primeiro
-  AJAX: o botão chama `buscarCep()`, o `fetch()` consulta a
-  [BrasilAPI](https://brasilapi.com.br/docs) e só os campos de rua, bairro, cidade e
-  estado mudam na página (campos `readonly`, que só o JavaScript preenche).
-- [Exemplo 02 — Feriados do ano](aula-05/parte-01/exemplo-02/index.html) — o que uma
-  página com AJAX precisa mostrar enquanto espera: `Buscando...` e o botão desabilitado
-  antes do `fetch()`, a `message` da API quando `resposta.ok` é falso (teste o ano 1800),
-  o `catch` quando nem há resposta e a tabela montada com `for...of`, com a data
-  convertida para dd/mm/aaaa usando `split("-")`.
-
-**Parte 02 — API de Produtos**
-
-Uma API feita para o curso, com um CRUD de produtos que salva de verdade. Cada aluno usa
-um código próprio na URL (`/api/{seu-codigo}/produtos`), então um não vê os dados do outro.
-
-- [Documentação da API](https://exemplosapi.evolutivasistemas.com.br/) — campos do
-  produto, rotas, exemplos com `fetch()` para cada método HTTP, filtros, busca e
-  paginação, as mensagens de erro e um console _Experimente_ para testar sem escrever
-  código. Também traz a parte 2, com login e token no header `Authorization`.
-- [Swagger](https://exemplosapi.evolutivasistemas.com.br/swagger) — todas as rotas da API
-  em uma página, prontas para executar.
-- [Meus Produtos](aula-05/parte-02/index.html) — o HTML e o
-  [CSS](aula-05/parte-02/style.css) já vêm prontos, o JavaScript é com o aluno: crie o
-  `script.js` na mesma pasta e siga o guia comentado no topo do `index.html` (ids da
-  página, o HTML de cada produto e dicas). Listar, cadastrar, editar, excluir e filtrar
-  falando com a API.
-
-**Exercícios**
-
-- [Exercícios da aula](aula-05/exercicios/index.html) — dois exercícios em um arquivo só,
-  um para cada parte, com o código a ser escrito em [script.js](aula-05/exercicios/script.js).
-  O 01 é uma consulta de DDD com AJAX na BrasilAPI: o DDD é validado antes do `fetch()`, a
-  página mostra `Buscando...`, os erros da API e as cidades, e o filtro trabalha em cima
-  do array `cidades` com o evento `input`, sem chamar a API de novo. O 02 é um controle de
-  estoque na [API de Produtos](https://exemplosapi.evolutivasistemas.com.br/): tabela
-  paginada com o total do header `X-Total-Count` e `?atraso` para ver o `Carregando...`,
-  `+1`/`-1` no estoque com `PATCH`, cadastro mostrando os `detalhes` de erro da API e
-  `DELETE` com resposta 204. O desafio usa a parte 2 da API, com login e token no header
-  `Authorization`.
-
-### Aula 06 — Local Storage
-
-**Parte 01 — Guardando dados no navegador**
-
-O que é salvo no `localStorage` continua lá depois de recarregar ou fechar a página. Cada
-exemplo tem um `index.html` e um `script.js` separado.
-
-- [Exemplo 01 — Salvando um nome](aula-06/parte-01/exemplo-01/index.html) — os pares de
-  chave e valor com `setItem()`, `getItem()` (que devolve `null` quando a chave não existe)
-  e `removeItem()`, e onde ver o que está salvo em F12 > Application > Local Storage.
-- [Exemplo 02 — Lista de compras com array](aula-06/parte-01/exemplo-02/index.html) — o
-  `localStorage` só guarda texto, então o array vai com `JSON.stringify()` e volta com
-  `JSON.parse()`. A lista é carregada ao abrir a página, salva a cada item adicionado e
-  apagada pelo botão limpar.
-
-**Exercícios**
-
-- [Exercícios da aula](aula-06/exercicios/index.html) — dois exercícios em um arquivo só,
-  com o código a ser escrito em [script.js](aula-06/exercicios/script.js). O 01 é um
-  contador de visitas e um tema escuro que sobrevivem ao F5: `Number()` no valor lido
-  (que sempre vem como texto), `removeItem()` para zerar e `classList.toggle()` com o tema
-  salvo, com o desafio de mostrar a data da visita anterior. O 02 é uma lista de tarefas
-  com array de objetos (`{ texto, feita }`) salva com `JSON.stringify()`: concluir,
-  excluir com `splice()`, contador de concluídas e limpar com `filter()`, com o desafio de
-  filtros que também ficam salvos.
-
-### Aula 07 — Simulado de prova
-
-- [Horizonte — Painel de notas](aula-07/simulado/index.html) — HTML e CSS prontos
-  para implementar o JavaScript com a [API de Notas](https://exemplosapi.evolutivasistemas.com.br/).
-  Crie o `script.js` na pasta `aula-07/simulado` e abra a página pelo Live Server.
-  Os requisitos e critérios de avaliação estão no [README da aula](aula-07/README.md):
-  cadastro, edição, exclusão, validação de quatro notas, prévia da média, filtros
-  e indicadores da turma. O JavaScript deve ser escrito pelos alunos.
-
-### Aula 08 — Prova final
-
-- [MiniMarket — Catálogo e carrinho](aula-08/trabalho-final/index.html) — HTML e CSS prontos
-  para implementar o JavaScript com a API MiniMarket ([contrato da API](aula-08/API.md)).
-  Escreva o código em `aula-08/trabalho-final/script.js` e abra a página pelo Live Server.
-  Os requisitos e critérios de avaliação estão no [README da aula](aula-08/README.md):
-  catálogo com busca, carrinho salvo no `localStorage` com desconto, compra simulada
-  sem login, login com token e cadastro de produtos protegido. O JavaScript deve ser
-  escrito pelos alunos.
-
+Faça o checkbox `filtro-estoque` mostrar somente produtos com estoque maior que zero, funcionando junto com a pesquisa e sem modificar o array original. Não vale pontos da nota principal; o professor pode usá-lo como desempate ou bonificação.
