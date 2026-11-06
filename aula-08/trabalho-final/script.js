@@ -1,10 +1,11 @@
 // ============================================================
-// MiniMarket — Prova final de JavaScript
+// MiniMarket — Prova final de JavaScript — LOJA
 //
-// Escreva aqui TODO o JavaScript da prova, usando JavaScript puro.
-// Os requisitos, os ids da página e os exemplos de HTML estão no
-// README-ALUNOS.md; as rotas da API estão no API.md.
-// Não altere o index.html nem o style.css.
+// Escreva aqui o JavaScript desta página (catálogo, pesquisa, carrinho
+// e finalização da compra), usando JavaScript puro. O JavaScript da
+// área do lojista fica no login/script.js. Os requisitos e os ids estão
+// no README.md; as rotas da API estão no API.md.
+// Não altere o HTML nem o CSS.
 // ============================================================
 
 // Troque SEU-CODIGO pelo seu código de aluno. O endereço do servidor é

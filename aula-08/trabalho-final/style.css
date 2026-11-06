@@ -10,6 +10,7 @@
      Mensagens: .mensagem  .mensagem.sucesso  .mensagem.erro  .mensagem.carregando
      Sessão:    .sessao  .sessao.logado
    Esconder/mostrar: elemento.hidden = true / false
+   Usado pelas duas páginas: index.html (loja) e login/index.html (lojista).
    ========================================================================== */
 
 :root {
@@ -64,7 +65,11 @@ input, button { font: inherit; }
 .marca { display: flex; align-items: center; gap: 10px; color: var(--principal); font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
 .simbolo { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: var(--principal); color: #fff; font-size: 18px; }
 .etiqueta { color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: 1.6px; border-left: 1px solid var(--borda); padding-left: 24px; }
-.aviso-topo { margin-left: auto; color: var(--muted); font-size: 12px; }
+.menu { display: flex; gap: 6px; margin-left: auto; }
+.menu a { padding: 8px 12px; border-radius: 8px; color: var(--muted); font-size: 13px; font-weight: 600; text-decoration: none; }
+.menu a:hover { background: var(--principal-claro); color: var(--principal); }
+.menu a[aria-current="page"] { background: var(--principal-claro); color: var(--principal); }
+.descricao a { color: var(--principal); font-weight: 600; }
 
 .introducao { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 34px 0 22px; }
 .sobretitulo { margin: 0 0 8px; color: var(--principal); font-size: 10px; font-weight: 700; letter-spacing: 1.6px; }
@@ -271,16 +276,15 @@ input::placeholder { color: #8a958d; }
 .nota { margin: 0; padding: 12px 22px 18px; border-top: 1px solid var(--borda); color: var(--muted); font-size: 11px; }
 
 /* --------------------------------------------------------------------------
-   Área do lojista: login (#form-login) e cadastro (#area-cadastro-produto)
+   Área do lojista (login/index.html): login (#form-login) e cadastro
+   (#area-cadastro-produto). Visitante: só o cartão de login, centralizado.
+   Logado: conta e cadastro lado a lado.
    -------------------------------------------------------------------------- */
 
-.lojista { margin-top: 36px; }
-.cabecalho-bloco { margin-bottom: 16px; }
-.cabecalho-bloco h2 { margin-bottom: 6px; }
-
-.grade-lojista { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 22px; align-items: start; }
-.conta, .cadastro { padding: 22px; }
-.conta h3, .cadastro h3 { margin-bottom: 12px; font-size: 16px; }
+.grade-lojista { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 22px; }
+.conta { flex: 0 1 360px; padding: 24px; }
+.cadastro { flex: 1 1 520px; max-width: 820px; padding: 24px; }
+.conta h2, .cadastro h2 { margin-bottom: 12px; font-size: 16px; }
 
 .sessao { display: flex; align-items: center; gap: 8px; margin: 0 0 14px; padding: 10px 12px; border-radius: 8px; background: var(--fundo); color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
 .sessao::before { content: ""; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background: #a7b0a9; }
@@ -317,9 +321,12 @@ footer > :last-child { margin-left: auto; }
 }
 
 @media (max-width: 760px) {
-  .etiqueta, .aviso-topo, .selo { display: none; }
+  .etiqueta, .selo { display: none; }
+  .marca { font-size: 19px; }
+  .menu a { padding: 6px 8px; font-size: 12px; }
   .introducao { padding-top: 24px; }
-  .grade-lojista, .cadastro-conteudo { grid-template-columns: 1fr; }
+  .cadastro-conteudo { grid-template-columns: 1fr; }
+  .conta, .cadastro { flex-basis: 100%; }
   .lista-produtos { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); padding: 16px; }
   .cabecalho-secao, .filtros, .totais, .lista-carrinho { padding-inline: 16px; }
   .acoes-carrinho { padding-inline: 16px; }

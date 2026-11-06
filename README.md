@@ -305,9 +305,11 @@ exemplo tem um `index.html` e um `script.js` separado.
 
 ### Aula 08 — Prova final
 
-- [MiniMarket — Catálogo e carrinho](aula-08/trabalho-final/index.html) — HTML e CSS prontos
-  para implementar o JavaScript com a API MiniMarket ([contrato da API](aula-08/API.md)).
-  Escreva o código em `aula-08/trabalho-final/script.js` e abra a página pelo Live Server.
+- [MiniMarket — Loja](aula-08/trabalho-final/index.html) e
+  [Área do lojista](aula-08/trabalho-final/login/index.html) — HTML e CSS prontos para
+  implementar o JavaScript com a API MiniMarket ([contrato da API](aula-08/API.md)).
+  Escreva o código em `aula-08/trabalho-final/script.js` (loja) e
+  `aula-08/trabalho-final/login/script.js` (lojista) e abra as páginas pelo Live Server.
   Os requisitos e critérios de avaliação estão no [README da aula](aula-08/README.md):
   catálogo com busca, carrinho salvo no `localStorage` com desconto, compra simulada
   sem login, login com token e cadastro de produtos protegido. O JavaScript deve ser
