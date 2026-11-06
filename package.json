@@ -1,0 +1,23 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "Implemente uma loja fictícia com catálogo, carrinho, compra simulada e login usando JavaScript puro e a API MiniMarket, documentada em [API.md](API.md). O HTML e o [CSS](trabalho-final/style.css) são fornecidos em duas páginas, ligadas pelo menu do topo e já com seus scripts referenciados. Abra o projeto pelo Live Server; aberta por `file://`, a página não consegue acessar a API.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "live-server --open=/trabalho-final/index.html --ignore=node_modules",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ByelBardini/curso-javascript-unibave-2026.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ByelBardini/curso-javascript-unibave-2026/issues"
+  },
+  "homepage": "https://github.com/ByelBardini/curso-javascript-unibave-2026#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
