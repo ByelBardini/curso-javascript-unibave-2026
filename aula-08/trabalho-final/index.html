@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1f6b48">
+  <title>MiniMarket — Prova final de JavaScript</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--
+  MiniMarket — HTML e CSS prontos. Não é necessário alterar este arquivo.
+  Todo o JavaScript vai no script.js (já ligado no fim da página).
+  Requisitos, ids e exemplos de HTML: README-ALUNOS.md. Rotas da API: API.md.
+-->
+
+  <header class="topo">
+    <div class="container navegacao">
+      <span class="marca"><span class="simbolo" aria-hidden="true">M</span>MiniMarket</span>
+      <span class="etiqueta">PROVA FINAL DE JAVASCRIPT</span>
+      <span class="aviso-topo">Loja fictícia · compra simulada, sem pagamento</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="introducao" aria-labelledby="titulo-pagina">
+      <div>
+        <p class="sobretitulo">CATÁLOGO · CARRINHO · LOGIN</p>
+        <h1 id="titulo-pagina">Escolha, monte o carrinho e finalize.</h1>
+        <p class="descricao">Qualquer visitante vê o catálogo, monta o carrinho e finaliza a compra sem login. Somente usuários autenticados cadastram produtos.</p>
+      </div>
+      <span class="selo">HTML + CSS prontos<br><strong>O script.js é com você.</strong></span>
+    </section>
+
+    <p id="mensagem" class="mensagem" role="status" aria-live="polite"></p>
+
+    <div class="loja">
+      <section class="cartao catalogo" aria-labelledby="titulo-catalogo">
+        <div class="cabecalho-secao">
+          <div>
+            <p class="sobretitulo">01 / CATÁLOGO</p>
+            <h2 id="titulo-catalogo">Produtos</h2>
+          </div>
+          <div class="acoes-catalogo">
+            <p class="contador"><strong id="total-produtos">0</strong> produtos cadastrados</p>
+            <button id="botao-recarregar" class="botao" type="button">↻ Atualizar catálogo</button>
+          </div>
+        </div>
+
+        <div class="filtros" role="search" aria-label="Pesquisar produtos">
+          <div class="busca">
+            <label for="campo-busca">Pesquisar pelo nome</label>
+            <input id="campo-busca" type="search" placeholder="Digite parte do nome, ex.: caneca" autocomplete="off">
+          </div>
+          <label class="opcao" for="filtro-estoque">
+            <input id="filtro-estoque" type="checkbox">
+            Somente com estoque <small>(desafio opcional)</small>
+          </label>
+        </div>
+
+        <ul id="lista-produtos" class="lista-produtos" aria-label="Produtos do catálogo"></ul>
+
+        <div id="estado-catalogo-vazio" class="vazio">
+          <span aria-hidden="true">⌕</span>
+          <h3>Nenhum produto para exibir</h3>
+          <p>O catálogo está vazio ou nenhum nome corresponde à pesquisa.</p>
+        </div>
+      </section>
+
+      <aside class="cartao carrinho" aria-labelledby="titulo-carrinho">
+        <div class="cabecalho-secao">
+          <div>
+            <p class="sobretitulo">02 / CARRINHO</p>
+            <h2 id="titulo-carrinho">Seu carrinho</h2>
+          </div>
+          <p class="selo-quantidade"><strong id="quantidade-carrinho">0</strong> unidades</p>
+        </div>
+
+        <ul id="lista-carrinho" class="lista-carrinho" aria-label="Itens do carrinho"></ul>
+
+        <div id="estado-carrinho-vazio" class="vazio">
+          <span aria-hidden="true">+</span>
+          <h3>Carrinho vazio</h3>
+          <p>Adicione produtos do catálogo. Não é preciso fazer login.</p>
+        </div>
+
+        <dl class="totais">
+          <div>
+            <dt>Subtotal</dt>
+            <dd id="subtotal-carrinho">R$ 0.00</dd>
+          </div>
+          <div class="linha-desconto">
+            <dt>Desconto <small>10% com subtotal a partir de R$ 200.00</small></dt>
+            <dd id="desconto-carrinho">R$ 0.00</dd>
+          </div>
+          <div class="linha-total">
+            <dt>Total</dt>
+            <dd id="total-carrinho">R$ 0.00</dd>
+          </div>
+        </dl>
+
+        <div class="acoes-carrinho">
+          <button id="botao-finalizar" class="botao primario" type="button">Finalizar compra</button>
+          <button id="botao-limpar-carrinho" class="botao discreto" type="button">Esvaziar carrinho</button>
+        </div>
+
+        <p id="mensagem-compra" class="mensagem" role="status" aria-live="polite"></p>
+
+        <p class="nota">Compra simulada: os valores finais são calculados pelo servidor e nenhum pagamento é realizado.</p>
+      </aside>
+    </div>
+
+    <section class="lojista" aria-labelledby="titulo-lojista">
+      <div class="cabecalho-bloco">
+        <p class="sobretitulo">03 / ÁREA DO LOJISTA</p>
+        <h2 id="titulo-lojista">Login e cadastro de produtos</h2>
+        <p class="descricao">Para comprar não é preciso login. Para cadastrar produtos, entre com o usuário e a senha fornecidos pelo professor.</p>
+      </div>
+
+      <div class="grade-lojista">
+        <section class="cartao conta" aria-labelledby="titulo-conta">
+          <h3 id="titulo-conta">Conta</h3>
+          <p id="estado-sessao" class="sessao">Visitante: você não está conectado.</p>
+
+          <form id="form-login" class="formulario" novalidate>
+            <label for="campo-usuario">Usuário</label>
+            <input id="campo-usuario" name="usuario" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+
+            <label for="campo-senha">Senha</label>
+            <input id="campo-senha" name="senha" type="password" autocomplete="current-password" required>
+
+            <button id="botao-login" class="botao primario" type="submit">Entrar</button>
+          </form>
+
+          <button id="botao-logout" class="botao" type="button" hidden>Sair</button>
+
+          <p class="nota-conta">Não existe cadastro de contas: use as credenciais fornecidas pelo professor.</p>
+        </section>
+
+        <section id="area-cadastro-produto" class="cartao cadastro" aria-labelledby="titulo-cadastro" hidden>
+          <h3 id="titulo-cadastro">Cadastrar produto</h3>
+
+          <div class="cadastro-conteudo">
+            <form id="form-produto" class="formulario" novalidate autocomplete="off">
+              <label for="produto-nome">Nome</label>
+              <input id="produto-nome" name="nome" type="text" placeholder="Ex.: Arroz 5 kg" required>
+
+              <div class="duas-colunas">
+                <div>
+                  <label for="produto-preco">Preço (R$)</label>
+                  <input id="produto-preco" name="preco" type="number" step="0.01" min="0.01" placeholder="Ex.: 29.90" required>
+                </div>
+                <div>
+                  <label for="produto-estoque">Estoque</label>
+                  <input id="produto-estoque" name="estoque" type="number" step="1" min="0" placeholder="Ex.: 8" required>
+                </div>
+              </div>
+
+              <button id="botao-cadastrar-produto" class="botao primario" type="submit">Cadastrar produto</button>
+            </form>
+
+            <div class="regras">
+              <p class="regras-titulo">Regras do cadastro</p>
+              <ul>
+                <li><strong>Nome:</strong> obrigatório, de 2 a 100 caracteres, não pode ter só espaços.</li>
+                <li><strong>Preço:</strong> obrigatório, número maior que zero.</li>
+                <li><strong>Estoque:</strong> obrigatório, número inteiro, zero ou mais.</li>
+                <li>Campo vazio não vale como zero.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <footer>
+      <span>Unibave · Prova final de JavaScript · MiniMarket</span>
+      <span>Catálogo e compras na API · carrinho no localStorage</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

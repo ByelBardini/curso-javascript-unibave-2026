@@ -303,4 +303,13 @@ exemplo tem um `index.html` e um `script.js` separado.
   cadastro, edição, exclusão, validação de quatro notas, prévia da média, filtros
   e indicadores da turma. O JavaScript deve ser escrito pelos alunos.
 
-### Aula 08 — _em breve_
+### Aula 08 — Prova final
+
+- [MiniMarket — Catálogo e carrinho](aula-08/trabalho-final/index.html) — HTML e CSS prontos
+  para implementar o JavaScript com a API MiniMarket ([contrato da API](aula-08/API.md)).
+  Escreva o código em `aula-08/trabalho-final/script.js` e abra a página pelo Live Server.
+  Os requisitos e critérios de avaliação estão no [README da aula](aula-08/README.md):
+  catálogo com busca, carrinho salvo no `localStorage` com desconto, compra simulada
+  sem login, login com token e cadastro de produtos protegido. O JavaScript deve ser
+  escrito pelos alunos.
+
